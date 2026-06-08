@@ -67,7 +67,6 @@
   button.btn.secondary{background:#e0e8ec; color:var(--navy);}
   button.btn.next{display:none;}
   .answered ~ .nav button.btn.next{display:block;}
-  /* results */
   #results{display:none;}
   .result-card{background:var(--card); border-radius:16px; padding:24px 20px; text-align:center; box-shadow:0 2px 10px rgba(0,0,0,.06);}
   .result-score{font-size:54px; font-weight:800; margin:6px 0;}
@@ -86,9 +85,6 @@
   .barwrap{background:#eef3f5; height:6px; border-radius:4px; margin-top:5px; overflow:hidden;}
   .barwrap>div{height:100%; border-radius:4px;}
   .footnote{font-size:12px; color:var(--muted); text-align:center; margin:24px 8px 0; line-height:1.5;}
-  .start-screen{text-align:center; padding-top:8px;}
-  .start-screen p{color:var(--muted); font-size:14.5px;}
-  .start-screen ul{text-align:left; display:inline-block; font-size:14px; color:var(--ink); margin:14px auto;}
 </style>
 </head>
 <body>
@@ -108,84 +104,348 @@
 
 <script>
 /* =========================================================================
-   QUESTION BANK — 100 questions, weighted to weak domains, all 19 covered.
+   FLORIDA SALES ASSOCIATE — 100-QUESTION PRACTICE EXAM
+   Question counts mirror the OFFICIAL DBPR Candidate Information Booklet
+   content outline (19 areas, % weight = # of questions, totaling 100).
    Each choice: t = text, e = explanation, k = true if correct answer.
    ========================================================================= */
 const BANK = [
-/* ---------- REAL ESTATE COMPUTATIONS & CLOSING (12) ---------- */
-{d:"Computations & Closing",q:"A home sells for $285,000. Using Florida's state documentary stamp tax rate on deeds of $0.70 per $100, what is the deed doc-stamp tax?",ch:[
- {t:"$1,995.00",e:"$285,000 ÷ $100 = 2,850 taxable units × $0.70 = $1,995 — correct.",k:true},
- {t:"$997.50",e:"$0.35 per $100 is the rate for promissory notes, not deeds.",k:false},
- {t:"$570.00",e:"This isn't a valid deed-tax calculation; it ignores the $0.70 rate.",k:false},
- {t:"$2,850.00",e:"This is the number of $100 units; you still multiply by the $0.70 rate.",k:false}]},
 
-{d:"Computations & Closing",q:"A buyer signs a new $200,000 promissory note. At Florida's $0.35 per $100 rate, the doc-stamp tax on the note is:",ch:[
- {t:"$700.00",e:"$200,000 ÷ $100 = 2,000 × $0.35 = $700 — the note rate.",k:true},
- {t:"$1,400.00",e:"$0.70 per $100 is the deed rate, not the note rate.",k:false},
- {t:"$400.00",e:"$400 is the intangible tax (2 mills), a separate charge.",k:false},
- {t:"$350.00",e:"Math error — this drops a zero from the calculation.",k:false}]},
+/* === I. THE REAL ESTATE BUSINESS (1) === */
+{d:"The Real Estate Business",q:"Property management, appraisal, financing, and brokerage are examples of:",ch:[
+ {t:"Specialized areas within the real estate business",e:"These are recognized specializations within the industry — correct.",k:true},
+ {t:"Government regulatory agencies",e:"They are professional fields, not agencies.",k:false},
+ {t:"Types of deeds",e:"Deeds are title documents, not business areas.",k:false},
+ {t:"Financing instruments",e:"They are business areas, not financing instruments.",k:false}]},
 
-{d:"Computations & Closing",q:"A buyer obtains a new $200,000 mortgage. Florida's intangible tax on a new mortgage is 2 mills ($0.002). The intangible tax is:",ch:[
- {t:"$400.00",e:"2 mills = $0.002 × $200,000 = $400 — correct.",k:true},
- {t:"$700.00",e:"$700 is the doc-stamp tax on the note, a different tax.",k:false},
- {t:"$200.00",e:"$200 would be 1 mill; the intangible tax is 2 mills.",k:false},
- {t:"$4,000.00",e:"Decimal error — 2 mills is $0.002, not $0.02.",k:false}]},
+/* === II. LICENSE LAW & QUALIFICATIONS FOR LICENSURE (6) === */
+{d:"License Law & Qualifications",q:"The pre-license course required to qualify for a Florida sales associate license is:",ch:[
+ {t:"63 hours",e:"The sales associate pre-license course is 63 hours — correct.",k:true},
+ {t:"14 hours",e:"14 hours is the biennial continuing-education requirement.",k:false},
+ {t:"45 hours",e:"45 hours is the sales associate post-license requirement.",k:false},
+ {t:"72 hours",e:"Not a Florida requirement.",k:false}]},
 
-{d:"Computations & Closing",q:"Annual property taxes are $3,650 (365-day method). If the seller is responsible for 120 days, the seller's prorated share is:",ch:[
- {t:"$1,200.00",e:"$3,650 ÷ 365 = $10/day × 120 days = $1,200 — correct.",k:true},
- {t:"$1,000.00",e:"This uses an incorrect day count or daily rate.",k:false},
- {t:"$3,650.00",e:"That's the full annual amount, not the 120-day share.",k:false},
- {t:"$30.00",e:"$30 isn't a valid figure here; the daily rate is $10.",k:false}]},
+{d:"License Law & Qualifications",q:"The Florida sales associate state exam requires a passing score of:",ch:[
+ {t:"75%",e:"A score of 75 out of 100 is required to pass — correct.",k:true},
+ {t:"70%",e:"The threshold is 75, not 70.",k:false},
+ {t:"80%",e:"The threshold is 75, not 80.",k:false},
+ {t:"60%",e:"The threshold is 75, not 60.",k:false}]},
 
-{d:"Computations & Closing",q:"A home sells for $320,000 at a 6% total commission. The listing and selling brokers split it 50/50, and the selling broker pays the associate 60% of its half. The associate receives:",ch:[
- {t:"$5,760.00",e:"$320,000 × 6% = $19,200; ÷ 2 = $9,600; × 60% = $5,760 — correct.",k:true},
- {t:"$9,600.00",e:"That's the selling broker's full half, before the associate's split.",k:false},
- {t:"$3,840.00",e:"$3,840 is the broker's retained 40%, not the associate's share.",k:false},
- {t:"$11,520.00",e:"This applies 60% to the entire commission instead of one half.",k:false}]},
+{d:"License Law & Qualifications",q:"Before the FIRST renewal, a new sales associate must complete post-license education of:",ch:[
+ {t:"45 hours",e:"45 hours of post-license education is required before the first renewal, or the license becomes void — correct.",k:true},
+ {t:"14 hours",e:"14 hours is the continuing education for later renewals.",k:false},
+ {t:"60 hours",e:"60 hours is the broker post-license requirement.",k:false},
+ {t:"28 hours",e:"Not a Florida figure.",k:false}]},
 
-{d:"Computations & Closing",q:"A seller wants to NET $200,000 after paying a 6% commission. The home must sell for approximately:",ch:[
- {t:"$212,766",e:"Sale price = $200,000 ÷ (1 − 0.06) = $212,765.96 — commission is a % of the sale price.",k:true},
- {t:"$212,000",e:"Adding 6% of the net understates it; commission is based on the higher sale price.",k:false},
- {t:"$188,000",e:"This subtracts commission instead of grossing the price up.",k:false},
- {t:"$206,000",e:"This isn't the correct net-price method.",k:false}]},
+{d:"License Law & Qualifications",q:"After the first renewal, continuing education required each renewal period is:",ch:[
+ {t:"14 hours every 2 years",e:"14 hours of CE are required each two-year cycle — correct.",k:true},
+ {t:"45 hours every 2 years",e:"45 hours is the one-time post-license requirement.",k:false},
+ {t:"30 hours annually",e:"Incorrect hours and frequency.",k:false},
+ {t:"None ever",e:"CE is mandatory.",k:false}]},
 
-{d:"Computations & Closing",q:"A home appraises at $250,000 and the buyer gets an 80% loan-to-value loan. The down payment is:",ch:[
- {t:"$50,000",e:"80% LTV = $200,000 loan; $250,000 − $200,000 = $50,000 down — correct.",k:true},
- {t:"$200,000",e:"$200,000 is the loan amount, not the down payment.",k:false},
- {t:"$20,000",e:"That's only 8% down, not 20%.",k:false},
- {t:"$62,500",e:"This uses the wrong percentage.",k:false}]},
+{d:"License Law & Qualifications",q:"A minimum requirement to apply for a Florida sales associate license is being at least:",ch:[
+ {t:"18 years old with a high school diploma or equivalent",e:"Applicants must be 18+ and hold a high school diploma or equivalent — correct.",k:true},
+ {t:"21 years old with a college degree",e:"A degree isn't required and the age is 18.",k:false},
+ {t:"16 years old",e:"16 is too young.",k:false},
+ {t:"A U.S. citizen",e:"Lawful presence is required, but U.S. citizenship is not.",k:false}]},
 
-{d:"Computations & Closing",q:"A lender charges 2 discount points on a $180,000 loan. One point equals 1% of the loan. The cost of the points is:",ch:[
- {t:"$3,600",e:"2 points × 1% × $180,000 = $3,600 — correct.",k:true},
- {t:"$1,800",e:"$1,800 is only one point.",k:false},
- {t:"$360",e:"A point is 1% ($1,800), not 0.1%.",k:false},
- {t:"$7,200",e:"That's 4 points, not 2.",k:false}]},
+{d:"License Law & Qualifications",q:"Which person is EXEMPT from needing a Florida real estate license?",ch:[
+ {t:"An owner selling or leasing their own property",e:"Owners dealing in their own property are exempt from licensure — correct.",k:true},
+ {t:"A person selling homes for others for compensation",e:"Selling for others for pay requires a license.",k:false},
+ {t:"A person who lists properties for a fee",e:"Listing property for a fee is licensed activity.",k:false},
+ {t:"An assistant who negotiates sales for a broker",e:"Negotiating sales requires a license.",k:false}]},
 
-{d:"Computations & Closing",q:"A parcel is the SW¼ of the NE¼ of a section. How many acres is it?",ch:[
- {t:"40 acres",e:"A section = 640 acres; 640 × ¼ × ¼ = 40 acres — correct.",k:true},
- {t:"160 acres",e:"160 acres is one quarter of a section — only one division.",k:false},
- {t:"10 acres",e:"10 acres would be ¼ of ¼ of ¼.",k:false},
- {t:"640 acres",e:"640 acres is the entire section.",k:false}]},
+/* === III. REAL ESTATE LICENSE LAW & COMMISSION RULES (2) === */
+{d:"License Law & Commission Rules",q:"The Florida Real Estate Commission (FREC) is composed of how many members?",ch:[
+ {t:"7 members",e:"FREC has 7 members appointed by the Governor — correct.",k:true},
+ {t:"5 members",e:"Incorrect — FREC has 7.",k:false},
+ {t:"9 members",e:"Incorrect — FREC has 7.",k:false},
+ {t:"11 members",e:"Incorrect — FREC has 7.",k:false}]},
 
-{d:"Computations & Closing",q:"A lot measures 43,560 square feet. How many acres is that?",ch:[
- {t:"1 acre",e:"One acre is defined as exactly 43,560 square feet — correct.",k:true},
- {t:"0.5 acre",e:"Half an acre is 21,780 sq ft.",k:false},
- {t:"2 acres",e:"Two acres would be 87,120 sq ft.",k:false},
- {t:"10 acres",e:"Far too large; an acre is 43,560 sq ft.",k:false}]},
+{d:"License Law & Commission Rules",q:"FREC operates within which state department?",ch:[
+ {t:"Department of Business and Professional Regulation (DBPR)",e:"FREC sits in the DBPR's Division of Real Estate — correct.",k:true},
+ {t:"Department of Revenue",e:"That department handles taxes.",k:false},
+ {t:"HUD",e:"HUD is a federal agency.",k:false},
+ {t:"Department of State",e:"That department handles other matters.",k:false}]},
 
-{d:"Computations & Closing",q:"A home sells for $300,000 with a new $240,000 mortgage. What is the COMBINED total of deed doc stamps, note doc stamps, and intangible tax?",ch:[
- {t:"$3,420",e:"Deed $2,100 + note $840 + intangible $480 = $3,420 — correct.",k:true},
- {t:"$2,100",e:"That's only the deed stamps.",k:false},
- {t:"$2,940",e:"This omits the $480 intangible tax.",k:false},
- {t:"$4,200",e:"This applies the deed rate to the loan amounts too.",k:false}]},
+/* === IV. AUTHORIZED RELATIONSHIPS, DUTIES & DISCLOSURES (7) === */
+{d:"Authorized Relationships",q:"In a Florida residential transaction, the presumed brokerage relationship is:",ch:[
+ {t:"Transaction broker",e:"Florida presumes a transaction-broker relationship unless another is established in writing — correct.",k:true},
+ {t:"Single agent",e:"Single agency must be established by written disclosure.",k:false},
+ {t:"No brokerage relationship",e:"That too must be specifically established.",k:false},
+ {t:"Dual agent",e:"Dual agency is illegal in Florida.",k:false}]},
 
-{d:"Computations & Closing",q:"Closing uses the 365-day method. Annual taxes of $2,920 are unpaid and the seller owns 90 days of the year. Since Florida taxes are paid in arrears, the closing entry is:",ch:[
- {t:"$720 debit to the seller",e:"$2,920 ÷ 365 = $8/day × 90 = $720; in arrears the seller owes it, so it's a debit to seller / credit to buyer — correct.",k:true},
- {t:"$720 credit to the seller",e:"It's a debit, not a credit — the seller hasn't yet paid the taxes for their period.",k:false},
- {t:"$2,200 debit to the seller",e:"$2,200 is the buyer's remaining-year share, not the seller's 90 days.",k:false},
- {t:"$8 debit to the seller",e:"$8 is the daily rate, not the 90-day total.",k:false}]},
+{d:"Authorized Relationships",q:"Which duty is owed by a SINGLE AGENT but NOT by a transaction broker?",ch:[
+ {t:"Loyalty",e:"Loyalty (with obedience and full confidentiality) is owed only by a single agent — correct.",k:true},
+ {t:"Dealing honestly and fairly",e:"Honesty and fair dealing are owed in both relationships.",k:false},
+ {t:"Accounting for all funds",e:"Accounting for funds is required in both.",k:false},
+ {t:"Using skill, care, and diligence",e:"This is owed in both relationships.",k:false}]},
 
-/* ---------- REAL ESTATE CONTRACTS (9) ---------- */
+{d:"Authorized Relationships",q:"Full confidentiality, obedience, and full disclosure are duties owed by a:",ch:[
+ {t:"Single agent",e:"These are among the single agent's duties to the principal — correct.",k:true},
+ {t:"Transaction broker",e:"A transaction broker owes only LIMITED confidentiality, not these full duties.",k:false},
+ {t:"Customer with no brokerage relationship",e:"Such a customer is owed honesty and fair dealing, not these.",k:false},
+ {t:"Title company",e:"A title company has no agency duties to the parties.",k:false}]},
+
+{d:"Authorized Relationships",q:"Dual agency in Florida is:",ch:[
+ {t:"Illegal",e:"Florida law prohibits dual agency — correct.",k:true},
+ {t:"The default relationship",e:"The default is transaction broker.",k:false},
+ {t:"Required in all sales",e:"It is banned, not required.",k:false},
+ {t:"Allowed with oral consent",e:"It cannot be consented to at all.",k:false}]},
+
+{d:"Authorized Relationships",q:"The single agent notice must be given to the principal:",ch:[
+ {t:"Before or at the time of entering the representation agreement",e:"The disclosure must be made before or at the time of entering the agreement — correct.",k:true},
+ {t:"Only at closing",e:"Closing is too late.",k:false},
+ {t:"Never — it is optional",e:"It is mandatory for single agency.",k:false},
+ {t:"Only if the customer asks",e:"It is required regardless of whether the customer asks.",k:false}]},
+
+{d:"Authorized Relationships",q:"A single agent may change to a transaction broker during a transaction only if:",ch:[
+ {t:"The principal signs the transition disclosure before the change",e:"Transition requires the principal's signed consent before the relationship changes — correct.",k:true},
+ {t:"Never — transition is prohibited",e:"Transition is allowed with proper disclosure and consent.",k:false},
+ {t:"It happens automatically at closing",e:"It is not automatic; consent is required first.",k:false},
+ {t:"The other party agrees",e:"It is the represented principal's consent that is required, not the other party's.",k:false}]},
+
+{d:"Authorized Relationships",q:"Knowingly misstating a material fact about a property is:",ch:[
+ {t:"Misrepresentation (fraud), a violation",e:"Knowingly misstating a material fact is actionable misrepresentation/fraud — correct.",k:true},
+ {t:"Permitted if the buyer never asks",e:"Concealing material facts is also a violation; you cannot hide them.",k:false},
+ {t:"Acceptable puffing",e:"Puffing is exaggerated opinion, not a false statement of material fact.",k:false},
+ {t:"Only an ethics issue with no legal consequence",e:"It carries legal and license consequences, not just ethical ones.",k:false}]},
+
+/* === V. REAL ESTATE BROKERAGE ACTIVITIES & PROCEDURES (12) === */
+{d:"Brokerage Activities",q:"A sales associate may legally be paid a commission by:",ch:[
+ {t:"Only their employing broker",e:"A sales associate may be paid only by the broker who employs them — correct.",k:true},
+ {t:"The seller directly",e:"Accepting pay directly from a principal is a violation.",k:false},
+ {t:"The buyer directly",e:"Accepting pay directly from a principal is a violation.",k:false},
+ {t:"Any party to the transaction",e:"Compensation must flow through the employing broker.",k:false}]},
+
+{d:"Brokerage Activities",q:"Earnest money delivered to a broker must be deposited into escrow no later than:",ch:[
+ {t:"The end of the 3rd business day after receipt",e:"The broker must deposit funds by the end of the 3rd business day — correct.",k:true},
+ {t:"Within 24 hours",e:"The associate must deliver promptly, but the deposit deadline is the 3rd business day.",k:false},
+ {t:"Within 10 business days",e:"Too long — the deadline is the 3rd business day.",k:false},
+ {t:"At closing",e:"Far too late; funds go to escrow by the 3rd business day.",k:false}]},
+
+{d:"Brokerage Activities",q:"Mixing escrow (trust) funds with the broker's personal or operating money is called:",ch:[
+ {t:"Commingling",e:"Commingling is improperly mixing trust funds with personal/business funds — correct.",k:true},
+ {t:"Conversion",e:"Conversion is USING another's escrow funds for one's own purposes.",k:false},
+ {t:"Novation",e:"Novation substitutes parties or contracts.",k:false},
+ {t:"Estoppel",e:"Estoppel bars a party from contradicting prior conduct.",k:false}]},
+
+{d:"Brokerage Activities",q:"When a broker receives conflicting demands on escrowed funds, FREC must be notified in writing within:",ch:[
+ {t:"15 business days",e:"The broker must notify FREC within 15 business days of conflicting demands — correct.",k:true},
+ {t:"30 business days",e:"30 business days is the deadline to institute a settlement procedure, not the notice.",k:false},
+ {t:"10 calendar days",e:"Incorrect timeframe.",k:false},
+ {t:"60 days",e:"Incorrect timeframe.",k:false}]},
+
+{d:"Brokerage Activities",q:"After notifying FREC of conflicting escrow demands, the broker must institute a settlement procedure within:",ch:[
+ {t:"30 business days",e:"Within 30 business days the broker must choose mediation, arbitration, interpleader, or an EDO — correct.",k:true},
+ {t:"15 business days",e:"15 business days is the FREC-notification deadline.",k:false},
+ {t:"90 days",e:"Incorrect timeframe.",k:false},
+ {t:"5 business days",e:"Incorrect timeframe.",k:false}]},
+
+{d:"Brokerage Activities",q:"A broker may keep up to how much of their OWN money in a sales escrow account to cover bank service charges?",ch:[
+ {t:"$1,000",e:"Up to $1,000 of personal funds may be kept in a sales escrow account — correct.",k:true},
+ {t:"$5,000",e:"$5,000 is the limit for a property-management escrow account.",k:false},
+ {t:"$0 — none is allowed",e:"A small cushion is permitted.",k:false},
+ {t:"Unlimited",e:"Amounts above the limit are commingling.",k:false}]},
+
+{d:"Brokerage Activities",q:"An active broker's registered office must include:",ch:[
+ {t:"At least one enclosed room and a proper entrance sign",e:"A principal office needs at least one enclosed room and proper signage — correct.",k:true},
+ {t:"Only a P.O. box",e:"A post office box is not a registered office.",k:false},
+ {t:"A residence with no sign",e:"A proper entrance sign is required.",k:false},
+ {t:"Anonymous shared space with no registration",e:"Offices must be registered with the DBPR.",k:false}]},
+
+{d:"Brokerage Activities",q:"A commission dispute between two cooperating brokers is properly resolved by:",ch:[
+ {t:"Arbitration or civil court — not FREC",e:"FREC does not settle commission disputes; brokers use arbitration or court — correct.",k:true},
+ {t:"FREC, which awards the commission",e:"FREC regulates licensees but does not decide who gets a commission.",k:false},
+ {t:"The Real Estate Recovery Fund",e:"That fund compensates harmed consumers, not broker fee disputes.",k:false},
+ {t:"A citation",e:"Citations address minor statutory violations, not fee disputes.",k:false}]},
+
+{d:"Brokerage Activities",q:"Federal antitrust law prohibits competing brokers from:",ch:[
+ {t:"Agreeing with each other to fix commission rates",e:"Conspiring to fix prices/commissions violates antitrust law — correct.",k:true},
+ {t:"Independently setting their own fees",e:"Each broker may set their own fees independently.",k:false},
+ {t:"Competing on price",e:"Price competition is exactly what antitrust law protects.",k:false},
+ {t:"Advertising their services",e:"Advertising is permitted.",k:false}]},
+
+{d:"Brokerage Activities",q:"A sales associate's advertising must:",ch:[
+ {t:"Include the brokerage (firm) name",e:"All advertising must include the brokerage's name — correct.",k:true},
+ {t:"Use only the associate's personal name",e:"The brokerage name is required, not just the associate's name.",k:false},
+ {t:"Omit all license information",e:"Advertising must not be misleading about licensure.",k:false},
+ {t:"Imply the associate owns the listings",e:"Associates work for the broker and do not own listings.",k:false}]},
+
+{d:"Brokerage Activities",q:"For conflicting escrow demands, which is NOT an authorized settlement procedure?",ch:[
+ {t:"Keeping the disputed funds for the brokerage",e:"Keeping disputed funds is conversion — never an authorized procedure, correct answer.",k:true},
+ {t:"Mediation",e:"Mediation is an authorized option.",k:false},
+ {t:"Arbitration",e:"Arbitration is an authorized option.",k:false},
+ {t:"Requesting an escrow disbursement order (EDO) from FREC",e:"An EDO from FREC is authorized.",k:false}]},
+
+{d:"Brokerage Activities",q:"A kickback or undisclosed referral fee paid to a licensee is:",ch:[
+ {t:"Prohibited unless properly disclosed",e:"Undisclosed kickbacks/referral fees are prohibited under RESPA and license law — correct.",k:true},
+ {t:"Always allowed",e:"Undisclosed referral fees are not allowed.",k:false},
+ {t:"Required on every transaction",e:"They are not required and are often illegal.",k:false},
+ {t:"Only an issue for appraisers",e:"It applies to licensees, not just appraisers.",k:false}]},
+
+/* === VI. VIOLATIONS OF LICENSE LAW, PENALTIES & PROCEDURES (2) === */
+{d:"Violations & Penalties",q:"Practicing real estate in Florida without a license is a:",ch:[
+ {t:"Third-degree felony",e:"Unlicensed real estate practice is a third-degree felony — correct.",k:true},
+ {t:"First-degree misdemeanor only",e:"It is elevated beyond a misdemeanor to a felony.",k:false},
+ {t:"Civil infraction only",e:"It carries criminal penalties, not just civil.",k:false},
+ {t:"Not a violation",e:"It is clearly a violation.",k:false}]},
+
+{d:"Violations & Penalties",q:"The maximum a single claimant may recover from the Florida Real Estate Recovery Fund for one transaction is:",ch:[
+ {t:"$50,000",e:"The Recovery Fund pays up to $50,000 per transaction — correct.",k:true},
+ {t:"$25,000",e:"Too low.",k:false},
+ {t:"$150,000",e:"$150,000 is the per-licensee aggregate cap across multiple judgments.",k:false},
+ {t:"$100,000",e:"Not the correct per-transaction limit.",k:false}]},
+
+/* === VII. FEDERAL & STATE LAWS PERTAINING TO REAL ESTATE (4) === */
+{d:"Federal & State Laws",q:"The federal Fair Housing Act prohibits discrimination based on all of the following EXCEPT:",ch:[
+ {t:"Occupation",e:"Occupation is not a protected class under the Fair Housing Act — correct answer.",k:true},
+ {t:"Race",e:"Race is a protected class.",k:false},
+ {t:"Religion",e:"Religion is a protected class.",k:false},
+ {t:"Familial status",e:"Familial status is a protected class.",k:false}]},
+
+{d:"Federal & State Laws",q:"The seventh federally protected class under the Fair Housing Act (besides race, color, religion, national origin, sex, and familial status) is:",ch:[
+ {t:"Handicap (disability)",e:"Disability/handicap is the seventh federally protected class — correct.",k:true},
+ {t:"Age",e:"Age is not a federal Fair Housing protected class.",k:false},
+ {t:"Income level",e:"Income is not a federal protected class.",k:false},
+ {t:"Marital status",e:"Marital status is not a federal Fair Housing class.",k:false}]},
+
+{d:"Federal & State Laws",q:"Steering, blockbusting, and redlining are prohibited by the:",ch:[
+ {t:"Fair Housing Act",e:"These discriminatory practices violate the Fair Housing Act — correct.",k:true},
+ {t:"Statute of Frauds",e:"That concerns written contracts.",k:false},
+ {t:"Regulation Z",e:"Reg Z governs lending disclosures.",k:false},
+ {t:"Statute of Limitations",e:"That sets time limits to file suit.",k:false}]},
+
+{d:"Federal & State Laws",q:"RESPA primarily regulates:",ch:[
+ {t:"Settlement (closing) costs and prohibits kickbacks",e:"RESPA governs disclosure of settlement costs and bans referral kickbacks — correct.",k:true},
+ {t:"Property tax rates",e:"Tax rates are set locally.",k:false},
+ {t:"Zoning decisions",e:"Zoning is a local government function.",k:false},
+ {t:"Appraiser licensing",e:"Appraisal licensing is separate.",k:false}]},
+
+/* === VIII. PROPERTY RIGHTS (8) === */
+{d:"Property Rights",q:"The 'bundle of rights' of real property ownership includes all of the following EXCEPT:",ch:[
+ {t:"The right to violate zoning laws",e:"Ownership never includes a right to break the law — correct answer.",k:true},
+ {t:"The right to possess",e:"Possession is a core ownership right.",k:false},
+ {t:"The right to exclude others",e:"Excluding others is part of the bundle.",k:false},
+ {t:"The right to transfer (dispose)",e:"The right to dispose/transfer is included.",k:false}]},
+
+{d:"Property Rights",q:"The highest and most complete form of ownership is:",ch:[
+ {t:"Fee simple absolute",e:"Fee simple absolute is ownership of indefinite duration with the fullest rights — correct.",k:true},
+ {t:"A life estate",e:"A life estate ends at death.",k:false},
+ {t:"A leasehold",e:"A leasehold is a tenant's temporary right, not ownership.",k:false},
+ {t:"An easement",e:"An easement is only a right to use, not ownership.",k:false}]},
+
+{d:"Property Rights",q:"An estate that lasts only for the lifetime of a named person is a:",ch:[
+ {t:"Life estate",e:"A life estate is measured by someone's life — correct.",k:true},
+ {t:"Estate for years",e:"That has a fixed term with definite dates.",k:false},
+ {t:"Fee simple defeasible",e:"That is ownership subject to a condition, not a lifetime.",k:false},
+ {t:"Tenancy at will",e:"That is a leasehold of indefinite, terminable duration.",k:false}]},
+
+{d:"Property Rights",q:"A neighbor's recorded right to cross your land via a driveway is a(n):",ch:[
+ {t:"Easement",e:"An easement grants the right to use another's land for a defined purpose — correct.",k:true},
+ {t:"Fee simple interest",e:"Fee simple is full ownership.",k:false},
+ {t:"Encroachment",e:"An encroachment is an unauthorized intrusion, not a granted right.",k:false},
+ {t:"Estate",e:"An estate is a possessory/ownership interest.",k:false}]},
+
+{d:"Property Rights",q:"An item of personal property permanently attached to real estate becomes a:",ch:[
+ {t:"Fixture, which conveys with the property",e:"An affixed item becomes a fixture and transfers with the property — correct.",k:true},
+ {t:"Chattel the seller always keeps",e:"Once affixed it generally stays unless excluded by contract.",k:false},
+ {t:"Trade fixture in every case",e:"Trade fixtures apply to commercial tenants, not all attachments.",k:false},
+ {t:"An emblement",e:"Emblements are annual crops, a separate concept.",k:false}]},
+
+{d:"Property Rights",q:"Two owners hold title with the right of survivorship, so a deceased owner's share passes to the survivor. This is:",ch:[
+ {t:"Joint tenancy",e:"Joint tenancy carries the right of survivorship — correct.",k:true},
+ {t:"Tenancy in common",e:"That has no survivorship; shares pass to heirs.",k:false},
+ {t:"Ownership in severalty",e:"Severalty is sole ownership by one person.",k:false},
+ {t:"Tenancy at sufferance",e:"That is a holdover-tenant lease situation.",k:false}]},
+
+{d:"Property Rights",q:"Tenancy in common differs from joint tenancy in that:",ch:[
+ {t:"There is no right of survivorship; a deceased owner's share passes to heirs",e:"Tenancy in common has no survivorship — shares pass to the estate/heirs, correct.",k:true},
+ {t:"Only one person can own the property",e:"Tenancy in common involves two or more owners.",k:false},
+ {t:"All shares must be exactly equal",e:"Ownership shares can be unequal.",k:false},
+ {t:"It always includes survivorship",e:"Survivorship is the feature of joint tenancy, not tenancy in common.",k:false}]},
+
+{d:"Property Rights",q:"A married couple in Florida who own their home together with survivorship typically hold title as:",ch:[
+ {t:"Tenants by the entirety",e:"Tenancy by the entirety is available to married couples and includes survivorship — correct.",k:true},
+ {t:"Tenants in common",e:"Tenancy in common lacks survivorship.",k:false},
+ {t:"Owners in severalty",e:"Severalty is sole ownership by one person.",k:false},
+ {t:"Joint tenants with no survivorship",e:"That arrangement omits the survivorship couples receive by the entirety.",k:false}]},
+
+/* === IX. TITLES, DEEDS & OWNERSHIP RESTRICTIONS (7) === */
+{d:"Titles & Deeds",q:"Which deed gives the buyer (grantee) the GREATEST protection?",ch:[
+ {t:"General warranty deed",e:"It includes the fullest covenants protecting against all title defects — correct.",k:true},
+ {t:"Quitclaim deed",e:"A quitclaim conveys only whatever interest the grantor has, with no warranties.",k:false},
+ {t:"Special warranty deed",e:"It covers only the grantor's period of ownership.",k:false},
+ {t:"Bargain and sale deed",e:"It implies ownership but offers limited warranties.",k:false}]},
+
+{d:"Titles & Deeds",q:"A deed that conveys only whatever interest the grantor may have, with no warranties, is a:",ch:[
+ {t:"Quitclaim deed",e:"It transfers any interest the grantor holds with no guarantees — correct.",k:true},
+ {t:"General warranty deed",e:"That carries full covenants.",k:false},
+ {t:"Special warranty deed",e:"That warrants only the grantor's ownership period.",k:false},
+ {t:"Trustee's deed",e:"A trustee's deed conveys trust property by a trustee.",k:false}]},
+
+{d:"Titles & Deeds",q:"For a deed to be valid, it must be:",ch:[
+ {t:"In writing and signed by the grantor",e:"A valid deed must be written and signed by the grantor, then delivered and accepted — correct.",k:true},
+ {t:"Signed by the grantee",e:"The grantee need not sign the deed.",k:false},
+ {t:"Notarized by the buyer",e:"Notarization is for recording and is not done by the buyer.",k:false},
+ {t:"Recorded to be valid between the parties",e:"Recording gives public notice but is not required for validity between the parties.",k:false}]},
+
+{d:"Titles & Deeds",q:"A restrictive covenant (deed restriction) is:",ch:[
+ {t:"A private limitation on land use, enforced by other owners or an HOA",e:"Deed restrictions are private controls enforced by parties such as an HOA — correct.",k:true},
+ {t:"A government zoning law",e:"Zoning is a public (government) control, not a private covenant.",k:false},
+ {t:"A type of mortgage",e:"It is not a financing instrument.",k:false},
+ {t:"A federal tax",e:"It is not a tax.",k:false}]},
+
+{d:"Titles & Deeds",q:"Title insurance protects the insured against:",ch:[
+ {t:"Title defects that existed before the policy date",e:"Title insurance covers undiscovered defects existing before issuance — correct.",k:true},
+ {t:"Future physical damage to the building",e:"Physical damage is covered by hazard insurance, not title.",k:false},
+ {t:"The borrower's failure to pay the mortgage",e:"Nonpayment is the borrower's obligation, not a title defect.",k:false},
+ {t:"Declines in the property's market value",e:"Market value changes are not title matters.",k:false}]},
+
+{d:"Titles & Deeds",q:"Real property transferred by a valid will when the owner dies is acquired by:",ch:[
+ {t:"Devise (testate succession)",e:"Real property passed by will is a devise; the owner died testate — correct.",k:true},
+ {t:"Escheat",e:"Escheat is when the state takes property left with no heirs.",k:false},
+ {t:"Adverse possession",e:"That is acquiring title by open, hostile use over time.",k:false},
+ {t:"Eminent domain",e:"That is a government taking for public use.",k:false}]},
+
+{d:"Titles & Deeds",q:"Acquiring title by openly, continuously, and without permission using another's land for the statutory period is:",ch:[
+ {t:"Adverse possession",e:"Open, notorious, continuous, hostile use for the statutory period can transfer title — correct.",k:true},
+ {t:"An easement by necessity",e:"That grants use (such as access), not ownership.",k:false},
+ {t:"A life estate",e:"A life estate is created by grant, not by trespass.",k:false},
+ {t:"A quitclaim conveyance",e:"A quitclaim is a voluntary transfer document.",k:false}]},
+
+/* === X. LEGAL DESCRIPTIONS (5) === */
+{d:"Legal Descriptions",q:"A legal description that uses compass directions and distances from a point of beginning is the:",ch:[
+ {t:"Metes and bounds method",e:"Metes and bounds traces boundaries by direction and distance back to the point of beginning — correct.",k:true},
+ {t:"Lot and block method",e:"That references a recorded plat.",k:false},
+ {t:"Government (rectangular) survey",e:"That uses townships, ranges, and sections.",k:false},
+ {t:"Street address",e:"A street address is not a legal description.",k:false}]},
+
+{d:"Legal Descriptions",q:"In the government survey system, one section contains:",ch:[
+ {t:"640 acres",e:"A section is one square mile = 640 acres — correct.",k:true},
+ {t:"36 acres",e:"A township has 36 sections, not 36 acres.",k:false},
+ {t:"160 acres",e:"160 acres is a quarter section.",k:false},
+ {t:"1 acre",e:"An acre is far smaller than a section.",k:false}]},
+
+{d:"Legal Descriptions",q:"A township is made up of how many sections?",ch:[
+ {t:"36",e:"A township is 6 by 6 miles, divided into 36 one-square-mile sections — correct.",k:true},
+ {t:"16",e:"Incorrect.",k:false},
+ {t:"640",e:"640 is the number of acres in a section.",k:false},
+ {t:"100",e:"Incorrect.",k:false}]},
+
+{d:"Legal Descriptions",q:"The 'lot and block' method describes property by reference to:",ch:[
+ {t:"A recorded subdivision plat map",e:"Lot and block references a recorded subdivision map — correct.",k:true},
+ {t:"Township and range lines",e:"That is the rectangular survey.",k:false},
+ {t:"Metes and bounds calls",e:"That is a separate method.",k:false},
+ {t:"The public land survey baseline",e:"Baselines are part of the rectangular survey.",k:false}]},
+
+{d:"Legal Descriptions",q:"A parcel described as the SW 1/4 of the NE 1/4 of a section contains how many acres?",ch:[
+ {t:"40 acres",e:"640 acres x 1/4 x 1/4 = 40 acres — correct.",k:true},
+ {t:"160 acres",e:"160 acres is one quarter of a section, only one division.",k:false},
+ {t:"10 acres",e:"10 acres would be 1/4 of 1/4 of 1/4.",k:false},
+ {t:"80 acres",e:"Incorrect; two quarter-divisions yield 40 acres.",k:false}]},
+
+/* === XI. REAL ESTATE CONTRACTS (12) === */
 {d:"Real Estate Contracts",q:"Which of the following is NOT required for a real estate sales contract to be valid?",ch:[
  {t:"An earnest money deposit",e:"Earnest money is customary but not legally required for validity — correct answer.",k:true},
  {t:"Offer and acceptance (mutual assent)",e:"Mutual assent is an essential element.",k:false},
@@ -196,15 +456,15 @@ const BANK = [
  {t:"The Statute of Frauds requires it",e:"The Statute of Frauds requires real estate sale contracts to be written to be enforceable — correct.",k:true},
  {t:"The Statute of Limitations requires it",e:"That sets time limits to sue, not the writing requirement.",k:false},
  {t:"RESPA requires it",e:"RESPA governs settlement cost disclosures, not contract form.",k:false},
- {t:"It doesn't — oral contracts are fully enforceable",e:"Oral real estate sale contracts are generally unenforceable.",k:false}]},
+ {t:"It does not — oral contracts are fully enforceable",e:"Oral real estate sale contracts are generally unenforceable.",k:false}]},
 
 {d:"Real Estate Contracts",q:"An option contract is best classified as what kind of contract?",ch:[
- {t:"Unilateral",e:"Only the seller is bound to hold the offer open; the buyer isn't obligated to buy — unilateral, correct.",k:true},
- {t:"Bilateral",e:"Bilateral means both parties promise to perform, which an option doesn't.",k:false},
+ {t:"Unilateral",e:"Only the seller is bound to hold the offer open; the buyer is not obligated to buy — unilateral, correct.",k:true},
+ {t:"Bilateral",e:"Bilateral means both parties promise to perform, which an option does not.",k:false},
  {t:"Implied",e:"An option is an express, written agreement, not implied.",k:false},
  {t:"Void",e:"An option is valid, not void.",k:false}]},
 
-{d:"Real Estate Contracts",q:"Under which listing does the broker earn a commission no matter who finds the buyer — even if the owner sells it themselves?",ch:[
+{d:"Real Estate Contracts",q:"Under which listing does the broker earn a commission no matter who finds the buyer — even the owner?",ch:[
  {t:"Exclusive right of sale",e:"Guarantees the listing broker a commission regardless of who procures the buyer — correct.",k:true},
  {t:"Exclusive agency",e:"Under exclusive agency the owner can sell themselves and owe no commission.",k:false},
  {t:"Open listing",e:"An open listing pays only the broker who actually finds the buyer.",k:false},
@@ -213,7 +473,7 @@ const BANK = [
 {d:"Real Estate Contracts",q:"A 16-year-old signs a contract to buy a condo. The contract is:",ch:[
  {t:"Voidable by the minor",e:"A minor lacks capacity, so the contract is voidable at the minor's option — correct.",k:true},
  {t:"Void",e:"Void means no contract ever existed; a minor's contract can stand if the minor chooses.",k:false},
- {t:"Valid and fully binding",e:"It isn't fully binding because the minor can disaffirm it.",k:false},
+ {t:"Valid and fully binding",e:"It is not fully binding because the minor can disaffirm it.",k:false},
  {t:"Automatically enforceable against the minor",e:"It cannot be enforced against the minor, who may disaffirm.",k:false}]},
 
 {d:"Real Estate Contracts",q:"A 'time is of the essence' clause means:",ch:[
@@ -226,7 +486,7 @@ const BANK = [
  {t:"Liquidated damages",e:"A pre-agreed amount kept on default is liquidated damages — correct.",k:true},
  {t:"Specific performance",e:"Specific performance forces the sale to close, not forfeiture of a deposit.",k:false},
  {t:"Compensatory damages",e:"Those require proving the actual loss suffered.",k:false},
- {t:"Punitive damages",e:"Punitive damages punish wrongdoing and aren't a typical contract remedy.",k:false}]},
+ {t:"Punitive damages",e:"Punitive damages punish wrongdoing and are not a typical contract remedy.",k:false}]},
 
 {d:"Real Estate Contracts",q:"A contract in which both parties have completely performed all obligations is:",ch:[
  {t:"Executed",e:"Executed means all obligations are completed — correct.",k:true},
@@ -236,11 +496,29 @@ const BANK = [
 
 {d:"Real Estate Contracts",q:"A buyer responds to a seller's offer by changing the price. This counteroffer:",ch:[
  {t:"Rejects and terminates the original offer",e:"A counteroffer rejects the original and substitutes a new offer — correct.",k:true},
- {t:"Accepts the original offer",e:"It isn't an acceptance because the terms were changed.",k:false},
+ {t:"Accepts the original offer",e:"It is not an acceptance because the terms were changed.",k:false},
  {t:"Has no effect on the original offer",e:"It ends the power to later accept the original.",k:false},
  {t:"Immediately forms a binding contract",e:"No contract forms until the counteroffer itself is accepted.",k:false}]},
 
-/* ---------- RESIDENTIAL MORTGAGES (9) ---------- */
+{d:"Real Estate Contracts",q:"A contract that is missing an essential element and has no legal effect is:",ch:[
+ {t:"Void",e:"A void contract lacks an essential element and has no legal force — correct.",k:true},
+ {t:"Voidable",e:"Voidable contracts are valid until a party elects to cancel.",k:false},
+ {t:"Valid",e:"Valid means fully enforceable.",k:false},
+ {t:"Executed",e:"Executed describes a completed contract.",k:false}]},
+
+{d:"Real Estate Contracts",q:"Under an exclusive AGENCY listing, the seller owes a commission:",ch:[
+ {t:"Only if a broker (not the seller) procures the buyer",e:"In exclusive agency the owner may sell themselves with no commission, but a broker-procured sale is owed — correct.",k:true},
+ {t:"To the broker no matter who sells",e:"That describes an exclusive right of sale.",k:false},
+ {t:"Never, under any circumstances",e:"A broker who finds the buyer is owed.",k:false},
+ {t:"Only to the buyer's agent",e:"The listing commission is not limited to a buyer's agent.",k:false}]},
+
+{d:"Real Estate Contracts",q:"A listing in which the broker keeps everything received above a price the seller sets is a:",ch:[
+ {t:"Net listing (legal in Florida but discouraged)",e:"A net listing lets the broker keep proceeds above the seller's net — legal in Florida but risky and discouraged, correct.",k:true},
+ {t:"Open listing",e:"An open listing pays the procuring broker a set commission.",k:false},
+ {t:"Exclusive right of sale",e:"That pays a commission regardless of who sells.",k:false},
+ {t:"Option listing",e:"That is not a standard listing type.",k:false}]},
+
+/* === XII. RESIDENTIAL MORTGAGES (9) === */
 {d:"Residential Mortgages",q:"Florida is which type of state regarding mortgages?",ch:[
  {t:"A lien-theory state",e:"In Florida the borrower keeps title and the lender holds a lien — correct.",k:true},
  {t:"A title-theory state",e:"Title-theory states give the lender title until paid — not Florida.",k:false},
@@ -278,7 +556,7 @@ const BANK = [
  {t:"10%",e:"PMI tracks the 20% equity threshold, not 10%.",k:false}]},
 
 {d:"Residential Mortgages",q:"The clause requiring the lender to release the lien once the loan is fully paid is the:",ch:[
- {t:"Defeasance clause",e:"Defeasance requires the lender to 'defeat' (release) the mortgage upon full payment — correct.",k:true},
+ {t:"Defeasance clause",e:"Defeasance requires the lender to release the mortgage upon full payment — correct.",k:true},
  {t:"Acceleration clause",e:"Acceleration makes the whole balance due upon default.",k:false},
  {t:"Due-on-sale clause",e:"That triggers payoff upon transfer.",k:false},
  {t:"Prepayment penalty clause",e:"That charges the borrower for paying off early.",k:false}]},
@@ -290,302 +568,81 @@ const BANK = [
  {t:"No payments are made until maturity",e:"Amortized loans require periodic payments.",k:false}]},
 
 {d:"Residential Mortgages",q:"A buyer takes title 'subject to' an existing mortgage. Who remains primarily liable on the note?",ch:[
- {t:"The original borrower (seller)",e:"Taking title 'subject to' leaves the original borrower liable; the buyer is not — correct.",k:true},
+ {t:"The original borrower (seller)",e:"Taking title subject to the loan leaves the original borrower liable; the buyer is not — correct.",k:true},
  {t:"The new buyer",e:"The buyer would be liable only under an assumption with novation.",k:false},
  {t:"The lender",e:"The lender is the creditor, not the obligor.",k:false},
  {t:"No one",e:"Someone remains liable — the original borrower.",k:false}]},
 
-/* ---------- TYPES OF MORTGAGES & SOURCES OF FINANCING (6) ---------- */
-{d:"Types of Mortgages & Financing",q:"FHA loans are:",ch:[
+/* === XIII. TYPES OF MORTGAGES & SOURCES OF FINANCING (4) === */
+{d:"Mortgage Types & Financing",q:"FHA loans are:",ch:[
  {t:"Insured by the FHA",e:"FHA insures loans made by approved lenders against default — correct.",k:true},
  {t:"Guaranteed by the VA",e:"The VA guarantees; the FHA insures — different agencies.",k:false},
- {t:"Made directly by the federal government",e:"FHA doesn't lend directly; private lenders do.",k:false},
+ {t:"Made directly by the federal government",e:"FHA does not lend directly; private lenders do.",k:false},
  {t:"Always interest-only",e:"FHA loans are typically amortized.",k:false}]},
 
-{d:"Types of Mortgages & Financing",q:"A key benefit of a VA loan for eligible veterans is:",ch:[
+{d:"Mortgage Types & Financing",q:"A key benefit of a VA loan for eligible veterans is:",ch:[
  {t:"No down payment is required",e:"VA loans can finance up to 100%, often with no down payment — correct.",k:true},
  {t:"The loan never has to be repaid",e:"The loan must still be repaid.",k:false},
  {t:"No credit review of any kind",e:"Lenders still evaluate creditworthiness.",k:false},
- {t:"It's available to anyone",e:"VA loans are limited to eligible veterans/service members.",k:false}]},
+ {t:"It is available to anyone",e:"VA loans are limited to eligible veterans and service members.",k:false}]},
 
-{d:"Types of Mortgages & Financing",q:"The secondary mortgage market (e.g., Fannie Mae, Freddie Mac):",ch:[
+{d:"Mortgage Types & Financing",q:"The secondary mortgage market (e.g., Fannie Mae, Freddie Mac):",ch:[
  {t:"Buys existing loans to give lenders liquidity",e:"It purchases loans so lenders can make more — correct.",k:true},
- {t:"Makes loans directly to consumers",e:"That's the primary market.",k:false},
+ {t:"Makes loans directly to consumers",e:"That is the primary market.",k:false},
  {t:"Sets the federal funds rate",e:"The Federal Reserve sets that rate.",k:false},
- {t:"Insures FHA loans",e:"FHA insures its own loans; that's not the secondary market's role.",k:false}]},
+ {t:"Insures FHA loans",e:"FHA insures its own loans; that is not the secondary market's role.",k:false}]},
 
-{d:"Types of Mortgages & Financing",q:"The Truth in Lending Act (Regulation Z) requires lenders to disclose:",ch:[
- {t:"The annual percentage rate (APR) and finance charges",e:"TILA/Reg Z requires the APR and total finance charge — correct.",k:true},
- {t:"The property's market value",e:"Market value is an appraisal matter.",k:false},
- {t:"The seller's net proceeds",e:"That's a closing/seller figure, not a TILA disclosure.",k:false},
- {t:"The zoning classification",e:"Zoning is unrelated to lending disclosure.",k:false}]},
-
-{d:"Types of Mortgages & Financing",q:"Under TRID, the borrower must receive the Closing Disclosure at least how long before closing?",ch:[
- {t:"3 business days",e:"The Closing Disclosure must arrive at least 3 business days before consummation — correct.",k:true},
- {t:"7 business days",e:"7 business days is the minimum wait after the Loan Estimate, a separate rule.",k:false},
- {t:"1 business day",e:"Too short under TRID.",k:false},
- {t:"15 business days",e:"Longer than required.",k:false}]},
-
-{d:"Types of Mortgages & Financing",q:"An adjustable-rate mortgage (ARM) sets its interest rate based on:",ch:[
+{d:"Mortgage Types & Financing",q:"An adjustable-rate mortgage (ARM) sets its interest rate based on:",ch:[
  {t:"An index plus a margin",e:"ARM rates equal an economic index plus the lender's margin and adjust periodically — correct.",k:true},
  {t:"A fixed rate for the entire term",e:"That describes a fixed-rate loan.",k:false},
  {t:"The borrower's credit score alone",e:"The score affects approval, not the ongoing rate formula.",k:false},
  {t:"The appraised value",e:"Appraised value affects LTV, not the rate adjustment.",k:false}]},
 
-/* ---------- REAL ESTATE BROKERAGE ACTIVITIES & PROCEDURES (8) ---------- */
-{d:"Brokerage Activities",q:"A sales associate may legally be paid a commission by:",ch:[
- {t:"Only their employing broker",e:"A sales associate may be paid only by the broker who employs them — correct.",k:true},
- {t:"The seller directly",e:"Accepting pay directly from a principal is a violation.",k:false},
- {t:"The buyer directly",e:"Accepting pay directly from a principal is a violation.",k:false},
- {t:"Any party to the transaction",e:"Compensation must flow through the employing broker.",k:false}]},
+/* === XIV. REAL ESTATE RELATED COMPUTATIONS & CLOSING OF TRANSACTIONS (6) === */
+{d:"Computations & Closing",q:"A home sells for $285,000. Using Florida's state documentary stamp tax rate on deeds of $0.70 per $100, the deed doc-stamp tax is:",ch:[
+ {t:"$1,995.00",e:"$285,000 / $100 = 2,850 units x $0.70 = $1,995 — correct.",k:true},
+ {t:"$997.50",e:"$0.35 per $100 is the rate for promissory notes, not deeds.",k:false},
+ {t:"$2,850.00",e:"That is the number of $100 units; you still multiply by the $0.70 rate.",k:false},
+ {t:"$570.00",e:"This is not a valid deed-tax calculation; it ignores the $0.70 rate.",k:false}]},
 
-{d:"Brokerage Activities",q:"Earnest money delivered to a broker must be deposited into escrow no later than:",ch:[
- {t:"The end of the 3rd business day after receipt",e:"The broker must deposit funds by the end of the 3rd business day — correct.",k:true},
- {t:"Within 24 hours",e:"The associate must deliver immediately, but the deposit deadline is the 3rd business day.",k:false},
- {t:"Within 10 business days",e:"Too long — the deadline is the 3rd business day.",k:false},
- {t:"At closing",e:"Far too late; funds go to escrow by the 3rd business day.",k:false}]},
+{d:"Computations & Closing",q:"The documentary stamp tax on the DEED is customarily paid in Florida by the:",ch:[
+ {t:"Seller",e:"The seller customarily pays the deed doc-stamp tax — correct.",k:true},
+ {t:"Buyer",e:"The buyer customarily pays the note doc stamps and the intangible tax on a new mortgage.",k:false},
+ {t:"Lender",e:"The lender does not pay transfer taxes.",k:false},
+ {t:"Listing broker",e:"The broker does not pay transfer taxes.",k:false}]},
 
-{d:"Brokerage Activities",q:"Mixing escrow (trust) funds with the broker's personal or operating money is called:",ch:[
- {t:"Commingling",e:"Commingling is improperly mixing trust funds with personal/business funds — correct.",k:true},
- {t:"Conversion",e:"Conversion is using another's escrow funds for one's own purposes.",k:false},
- {t:"Novation",e:"Novation substitutes parties or contracts.",k:false},
- {t:"Estoppel",e:"Estoppel bars a party from contradicting prior conduct.",k:false}]},
+{d:"Computations & Closing",q:"On a closing statement, the buyer's earnest money deposit already paid appears as a:",ch:[
+ {t:"Credit to the buyer",e:"Money the buyer already paid is credited to the buyer at closing — correct.",k:true},
+ {t:"Debit to the buyer",e:"It is not an additional charge to the buyer.",k:false},
+ {t:"Credit to the seller",e:"It is not credited to the seller.",k:false},
+ {t:"Debit to the seller",e:"It is not a seller charge.",k:false}]},
 
-{d:"Brokerage Activities",q:"When a broker receives conflicting demands on escrowed funds, FREC must be notified in writing within:",ch:[
- {t:"15 business days",e:"The broker must notify FREC within 15 business days of conflicting demands — correct.",k:true},
- {t:"30 business days",e:"30 business days is the deadline to institute a settlement procedure, not the notice.",k:false},
- {t:"10 calendar days",e:"Incorrect timeframe.",k:false},
- {t:"60 days",e:"Incorrect timeframe.",k:false}]},
+{d:"Computations & Closing",q:"Annual property taxes are $2,920, unpaid, and the seller owns 90 days of the year (365-day method). Because Florida taxes are paid in arrears, the closing entry is:",ch:[
+ {t:"$720 debit to the seller",e:"$2,920 / 365 = $8/day x 90 = $720; in arrears the seller owes it, so it is a debit to seller / credit to buyer — correct.",k:true},
+ {t:"$720 credit to the seller",e:"It is a debit, not a credit — the seller has not yet paid the taxes for their period.",k:false},
+ {t:"$2,200 debit to the seller",e:"$2,200 is the buyer's remaining-year share, not the seller's 90 days.",k:false},
+ {t:"$8 debit to the seller",e:"$8 is the daily rate, not the 90-day total.",k:false}]},
 
-{d:"Brokerage Activities",q:"After notifying FREC of conflicting escrow demands, the broker must institute a settlement procedure within:",ch:[
- {t:"30 business days",e:"Within 30 business days the broker must choose mediation, arbitration, interpleader, or an EDO — correct.",k:true},
- {t:"15 business days",e:"15 business days is the FREC-notification deadline.",k:false},
- {t:"90 days",e:"Incorrect timeframe.",k:false},
- {t:"5 business days",e:"Incorrect timeframe.",k:false}]},
+{d:"Computations & Closing",q:"A home sells for $320,000 at a 6% total commission. The listing and selling brokers split it 50/50, and the selling broker pays the associate 60% of its half. The associate receives:",ch:[
+ {t:"$5,760",e:"$320,000 x 6% = $19,200; / 2 = $9,600; x 60% = $5,760 — correct.",k:true},
+ {t:"$9,600",e:"That is the selling broker's full half, before the associate's split.",k:false},
+ {t:"$3,840",e:"$3,840 is the broker's retained 40%, not the associate's share.",k:false},
+ {t:"$11,520",e:"This applies 60% to the entire commission instead of one half.",k:false}]},
 
-{d:"Brokerage Activities",q:"A broker may keep up to how much of their OWN money in a sales escrow account to cover bank service charges?",ch:[
- {t:"$1,000",e:"Up to $1,000 of personal funds may be kept in a sales escrow account — correct.",k:true},
- {t:"$5,000",e:"$5,000 is the limit for a property-management escrow account.",k:false},
- {t:"$0 — none is allowed",e:"A small cushion is permitted.",k:false},
- {t:"Unlimited",e:"Amounts above the limit constitute commingling.",k:false}]},
+{d:"Computations & Closing",q:"A seller wants to NET $200,000 after paying a 6% commission. The home must sell for approximately:",ch:[
+ {t:"$212,766",e:"Sale price = $200,000 / (1 - 0.06) = $212,766; commission is a % of the sale price — correct.",k:true},
+ {t:"$212,000",e:"Adding 6% of the net understates it; commission is based on the higher sale price.",k:false},
+ {t:"$188,000",e:"This subtracts commission instead of grossing the price up.",k:false},
+ {t:"$206,000",e:"This is not the correct net-price method.",k:false}]},
 
-{d:"Brokerage Activities",q:"An active broker's registered office must include:",ch:[
- {t:"At least one enclosed room and a proper entrance sign",e:"A principal office needs at least one enclosed room and proper signage — correct.",k:true},
- {t:"Only a P.O. box",e:"A post office box is not a registered office.",k:false},
- {t:"A residence with no sign",e:"A proper entrance sign is required.",k:false},
- {t:"Anonymous shared space with no registration",e:"Offices must be registered with the DBPR.",k:false}]},
+/* === XV. REAL ESTATE MARKETS & ANALYSIS (1) === */
+{d:"Markets & Analysis",q:"When the supply of homes exceeds buyer demand, prices generally:",ch:[
+ {t:"Fall, creating a buyer's market",e:"Excess supply relative to demand pushes prices down — correct.",k:true},
+ {t:"Rise sharply",e:"Prices rise when demand exceeds supply.",k:false},
+ {t:"Stay fixed by law",e:"Prices are not legally fixed.",k:false},
+ {t:"Are set by FREC",e:"FREC regulates licensees, not market prices.",k:false}]},
 
-{d:"Brokerage Activities",q:"A commission dispute between two cooperating brokers is properly resolved by:",ch:[
- {t:"Arbitration or civil court — not FREC",e:"FREC does not settle commission disputes; brokers use arbitration or court — correct.",k:true},
- {t:"FREC, which awards the commission",e:"FREC regulates licensees but doesn't decide who gets a commission.",k:false},
- {t:"The Real Estate Recovery Fund",e:"That fund compensates harmed consumers, not broker fee disputes.",k:false},
- {t:"A citation",e:"Citations address minor statutory violations, not fee disputes.",k:false}]},
-
-/* ---------- VIOLATIONS OF LICENSE LAW, PENALTIES & PROCEDURES (6) ---------- */
-{d:"Violations & Penalties",q:"Practicing real estate in Florida without a license is a:",ch:[
- {t:"Third-degree felony",e:"Unlicensed real estate practice is a third-degree felony — correct.",k:true},
- {t:"First-degree misdemeanor only",e:"It is elevated beyond a misdemeanor to a felony.",k:false},
- {t:"Civil infraction only",e:"It carries criminal penalties, not just civil.",k:false},
- {t:"Not a violation",e:"It is clearly a violation.",k:false}]},
-
-{d:"Violations & Penalties",q:"The maximum administrative fine FREC may impose per violation is:",ch:[
- {t:"$5,000",e:"FREC may fine up to $5,000 per count/violation — correct.",k:true},
- {t:"$1,000",e:"Below the statutory maximum.",k:false},
- {t:"$500",e:"$500 is the maximum for a citation, a different mechanism.",k:false},
- {t:"$10,000",e:"Exceeds the $5,000 statutory cap.",k:false}]},
-
-{d:"Violations & Penalties",q:"A citation issued by FREC carries a fine in the range of:",ch:[
- {t:"$100 to $500",e:"Citations carry fines of $100 to $500 for specified minor violations — correct.",k:true},
- {t:"$1,000 to $5,000",e:"That range applies to formal disciplinary fines, not citations.",k:false},
- {t:"$5,000 to $10,000",e:"Exceeds the citation range.",k:false},
- {t:"No fine at all",e:"Citations do include a fine.",k:false}]},
-
-{d:"Violations & Penalties",q:"A broker uses money from the escrow account to pay personal bills. This is:",ch:[
- {t:"Conversion",e:"Conversion is the unauthorized use of trust funds — a serious violation, correct.",k:true},
- {t:"Commingling",e:"Commingling is mixing funds; using them is conversion.",k:false},
- {t:"A minor citable offense",e:"It is a major offense, not a minor citable one.",k:false},
- {t:"Permitted with disclosure",e:"It is never permitted, even with disclosure.",k:false}]},
-
-{d:"Violations & Penalties",q:"The maximum a single claimant may recover from the Florida Real Estate Recovery Fund for one transaction is:",ch:[
- {t:"$50,000",e:"The fund pays up to $50,000 per transaction — correct.",k:true},
- {t:"$25,000",e:"Too low.",k:false},
- {t:"$150,000",e:"$150,000 is the per-licensee aggregate cap across multiple judgments.",k:false},
- {t:"$100,000",e:"Not the correct per-transaction limit.",k:false}]},
-
-{d:"Violations & Penalties",q:"When the Recovery Fund pays a claim because of a licensee's conduct, that licensee's license is:",ch:[
- {t:"Automatically suspended until the fund is repaid",e:"The license is suspended until the licensee reimburses the fund plus interest — correct.",k:true},
- {t:"Unaffected",e:"There is a consequence — automatic suspension.",k:false},
- {t:"Permanently revoked with no recourse",e:"Reinstatement is possible after repayment.",k:false},
- {t:"Upgraded to a broker license",e:"Payment does not change license type.",k:false}]},
-
-/* ---------- TAXES AFFECTING REAL ESTATE (6) ---------- */
-{d:"Taxes Affecting Real Estate",q:"Ad valorem property taxes are based on:",ch:[
- {t:"The assessed value of the property",e:"'Ad valorem' means 'according to value' — correct.",k:true},
- {t:"The square footage only",e:"Size influences value but isn't the tax base directly.",k:false},
- {t:"The owner's income",e:"Property tax is not income-based.",k:false},
- {t:"The latest sale price only",e:"Assessed value, not just the last sale price, sets the base.",k:false}]},
-
-{d:"Taxes Affecting Real Estate",q:"One mill equals:",ch:[
- {t:"$1 per $1,000 of value ($0.001)",e:"A mill is one-thousandth of a dollar, or $1 per $1,000 — correct.",k:true},
- {t:"$1 per $100",e:"$1 per $100 would be 10 mills.",k:false},
- {t:"$10 per $1,000",e:"That's 10 mills.",k:false},
- {t:"1% of value",e:"1% equals 10 mills, not one.",k:false}]},
-
-{d:"Taxes Affecting Real Estate",q:"Florida's homestead exemption can reduce a primary residence's taxable value by up to:",ch:[
- {t:"$50,000 (in two $25,000 tiers)",e:"A first $25,000 (all taxes) plus a second $25,000 (non-school) totals up to $50,000 — correct.",k:true},
- {t:"$25,000 only",e:"That's only the first tier.",k:false},
- {t:"$100,000",e:"Exceeds the homestead amount.",k:false},
- {t:"$5,000",e:"$5,000 is the widow/widower or disability exemption, not homestead.",k:false}]},
-
-{d:"Taxes Affecting Real Estate",q:"The 'Save Our Homes' cap limits annual increases in the assessed value of homestead property to:",ch:[
- {t:"3% or the change in CPI, whichever is lower",e:"Save Our Homes caps homestead increases at 3% or CPI, whichever is less — correct.",k:true},
- {t:"10% every year",e:"10% is the cap for certain non-homestead property.",k:false},
- {t:"5% every year",e:"The homestead cap is 3%, not 5%.",k:false},
- {t:"There is no cap",e:"There is a cap on homestead assessments.",k:false}]},
-
-{d:"Taxes Affecting Real Estate",q:"A charge levied only on properties that benefit from a specific public improvement (such as a new sidewalk) is a:",ch:[
- {t:"Special assessment",e:"Special assessments are non-ad-valorem charges on benefiting properties — correct.",k:true},
- {t:"Ad valorem tax",e:"Ad valorem taxes fund general government and are value-based.",k:false},
- {t:"Documentary stamp tax",e:"Doc stamps are transfer taxes.",k:false},
- {t:"Intangible tax",e:"The intangible tax applies to new mortgages.",k:false}]},
-
-{d:"Taxes Affecting Real Estate",q:"When Florida property taxes go unpaid, the county collects by selling a:",ch:[
- {t:"Tax certificate",e:"Counties sell tax certificates to investors to collect delinquent taxes — correct.",k:true},
- {t:"Warranty deed",e:"A warranty deed conveys ownership, unrelated to delinquency.",k:false},
- {t:"Estoppel certificate",e:"An estoppel certificate verifies amounts owed, not a tax sale.",k:false},
- {t:"Satisfaction of mortgage",e:"A satisfaction releases a paid-off mortgage.",k:false}]},
-
-/* ---------- PROPERTY RIGHTS (6) ---------- */
-{d:"Property Rights",q:"The 'bundle of rights' of real property ownership includes all of the following EXCEPT:",ch:[
- {t:"The right to violate zoning laws",e:"Ownership never includes a right to break the law — correct answer.",k:true},
- {t:"The right to possess",e:"Possession is a core ownership right.",k:false},
- {t:"The right to exclude others",e:"Excluding others is part of the bundle.",k:false},
- {t:"The right to transfer (dispose)",e:"The right to dispose/transfer is included.",k:false}]},
-
-{d:"Property Rights",q:"The highest and most complete form of ownership is:",ch:[
- {t:"Fee simple absolute",e:"Fee simple absolute is ownership of indefinite duration with the fullest rights — correct.",k:true},
- {t:"A life estate",e:"A life estate ends at death.",k:false},
- {t:"A leasehold",e:"A leasehold is a tenant's temporary right, not ownership.",k:false},
- {t:"An easement",e:"An easement is only a right to use, not ownership.",k:false}]},
-
-{d:"Property Rights",q:"An estate that lasts only for the lifetime of a named person is a:",ch:[
- {t:"Life estate",e:"A life estate is measured by someone's life — correct.",k:true},
- {t:"Estate for years",e:"That has a fixed term with definite dates.",k:false},
- {t:"Fee simple defeasible",e:"That is ownership subject to a condition, not a lifetime.",k:false},
- {t:"Tenancy at will",e:"That is a leasehold of indefinite, terminable duration.",k:false}]},
-
-{d:"Property Rights",q:"A neighbor's recorded right to cross your land via a driveway is a(n):",ch:[
- {t:"Easement",e:"An easement grants the right to use another's land for a defined purpose — correct.",k:true},
- {t:"Fee simple interest",e:"Fee simple is full ownership.",k:false},
- {t:"Encroachment",e:"An encroachment is an unauthorized intrusion, not a granted right.",k:false},
- {t:"Estate",e:"An estate is a possessory/ownership interest.",k:false}]},
-
-{d:"Property Rights",q:"An item of personal property that has been permanently attached to real estate becomes a:",ch:[
- {t:"Fixture, which conveys with the property",e:"An affixed item becomes a fixture and transfers with the property — correct.",k:true},
- {t:"Chattel the seller always keeps",e:"Once affixed it generally stays unless excluded by contract.",k:false},
- {t:"Trade fixture in every case",e:"Trade fixtures apply to commercial tenants, not all attachments.",k:false},
- {t:"An emblement",e:"Emblements are annual crops, a separate concept.",k:false}]},
-
-{d:"Property Rights",q:"Two owners hold title with the right of survivorship, so a deceased owner's share passes to the survivor. This is:",ch:[
- {t:"Joint tenancy",e:"Joint tenancy carries the right of survivorship — correct.",k:true},
- {t:"Tenancy in common",e:"That has no survivorship; shares pass to heirs.",k:false},
- {t:"Ownership in severalty",e:"Severalty is sole ownership by one person.",k:false},
- {t:"Tenancy at sufferance",e:"That is a holdover-tenant lease situation.",k:false}]},
-
-/* ---------- AUTHORIZED RELATIONSHIPS, DUTIES & DISCLOSURES (5) ---------- */
-{d:"Authorized Relationships",q:"In a Florida residential transaction, the presumed brokerage relationship is:",ch:[
- {t:"Transaction broker",e:"Florida presumes a transaction-broker relationship unless another is established in writing — correct.",k:true},
- {t:"Single agent",e:"Single agency must be established by written disclosure.",k:false},
- {t:"No brokerage relationship",e:"That too must be specifically established.",k:false},
- {t:"Dual agent",e:"Dual agency is illegal in Florida.",k:false}]},
-
-{d:"Authorized Relationships",q:"Which duty is owed by a SINGLE AGENT but NOT by a transaction broker?",ch:[
- {t:"Loyalty",e:"Loyalty (with obedience and full confidentiality) is owed only by a single agent — correct.",k:true},
- {t:"Dealing honestly and fairly",e:"Honesty and fair dealing are owed in both relationships.",k:false},
- {t:"Accounting for all funds",e:"Accounting for funds is required in both.",k:false},
- {t:"Using skill, care, and diligence",e:"This is owed in both relationships.",k:false}]},
-
-{d:"Authorized Relationships",q:"Dual agency in Florida is:",ch:[
- {t:"Illegal",e:"Florida law prohibits dual agency — correct.",k:true},
- {t:"The default relationship",e:"The default is transaction broker.",k:false},
- {t:"Required in all sales",e:"It is banned, not required.",k:false},
- {t:"Allowed with oral consent",e:"It cannot be consented to at all.",k:false}]},
-
-{d:"Authorized Relationships",q:"The single agent notice must be given to the principal:",ch:[
- {t:"Before or at the time of entering the representation agreement",e:"The disclosure must be made before or at the time of entering the agreement — correct.",k:true},
- {t:"Only at closing",e:"Closing is too late.",k:false},
- {t:"Never — it's optional",e:"It is mandatory for single agency.",k:false},
- {t:"Only if the customer asks",e:"It is required regardless of whether the customer asks.",k:false}]},
-
-{d:"Authorized Relationships",q:"A licensee who represents neither party but assists both is a:",ch:[
- {t:"Transaction broker",e:"A transaction broker gives limited representation to both without being either one's agent — correct.",k:true},
- {t:"Single agent",e:"A single agent fully represents one party.",k:false},
- {t:"Fiduciary to the buyer",e:"A transaction broker owes limited, not full fiduciary, duties.",k:false},
- {t:"Designated sales associate by default",e:"That is a special non-residential arrangement, not the default.",k:false}]},
-
-/* ---------- LICENSE LAW & QUALIFICATIONS FOR LICENSURE (5) ---------- */
-{d:"License Law & Qualifications",q:"To qualify for a Florida sales associate license, the required pre-license course is:",ch:[
- {t:"63 hours",e:"The sales associate pre-license course is 63 hours — correct.",k:true},
- {t:"14 hours",e:"14 hours is the biennial continuing-education requirement.",k:false},
- {t:"45 hours",e:"45 hours is the sales associate post-license requirement.",k:false},
- {t:"72 hours",e:"Not a Florida requirement.",k:false}]},
-
-{d:"License Law & Qualifications",q:"The Florida sales associate state exam requires a passing score of:",ch:[
- {t:"75%",e:"A score of 75 out of 100 is required to pass — correct.",k:true},
- {t:"70%",e:"The threshold is 75, not 70.",k:false},
- {t:"80%",e:"The threshold is 75, not 80.",k:false},
- {t:"60%",e:"The threshold is 75, not 60.",k:false}]},
-
-{d:"License Law & Qualifications",q:"Before the FIRST renewal, a new sales associate must complete post-license education of:",ch:[
- {t:"45 hours",e:"45 hours of post-license education is required before the first renewal — correct.",k:true},
- {t:"14 hours",e:"14 hours is continuing education for later renewals.",k:false},
- {t:"60 hours",e:"60 hours is the broker post-license requirement.",k:false},
- {t:"28 hours",e:"Not a Florida figure.",k:false}]},
-
-{d:"License Law & Qualifications",q:"After the first renewal, continuing education required each renewal period is:",ch:[
- {t:"14 hours every 2 years",e:"14 hours of CE are required each two-year cycle — correct.",k:true},
- {t:"45 hours every 2 years",e:"45 hours is the one-time post-license requirement.",k:false},
- {t:"30 hours annually",e:"Incorrect hours and frequency.",k:false},
- {t:"None ever",e:"CE is mandatory.",k:false}]},
-
-{d:"License Law & Qualifications",q:"A minimum requirement to apply for a Florida sales associate license is being at least:",ch:[
- {t:"18 years old with a high school diploma or equivalent",e:"Applicants must be 18+ and hold a high school diploma or equivalent — correct.",k:true},
- {t:"21 years old with a college degree",e:"A degree isn't required and the age is 18.",k:false},
- {t:"16 years old",e:"16 is too young.",k:false},
- {t:"A U.S. citizen",e:"Lawful presence is required, but U.S. citizenship is not.",k:false}]},
-
-/* ---------- LEGAL DESCRIPTIONS (5) ---------- */
-{d:"Legal Descriptions",q:"A legal description that uses compass directions and distances from a point of beginning is the:",ch:[
- {t:"Metes and bounds method",e:"Metes and bounds traces boundaries by direction and distance back to the point of beginning — correct.",k:true},
- {t:"Lot and block method",e:"That references a recorded plat.",k:false},
- {t:"Government (rectangular) survey",e:"That uses townships, ranges, and sections.",k:false},
- {t:"Street address",e:"A street address is not a legal description.",k:false}]},
-
-{d:"Legal Descriptions",q:"In the government survey system, one section contains:",ch:[
- {t:"640 acres",e:"A section is one square mile = 640 acres — correct.",k:true},
- {t:"36 acres",e:"A township has 36 sections, not 36 acres.",k:false},
- {t:"160 acres",e:"160 acres is a quarter section.",k:false},
- {t:"1 acre",e:"An acre is far smaller than a section.",k:false}]},
-
-{d:"Legal Descriptions",q:"A township is made up of how many sections?",ch:[
- {t:"36",e:"A township is 6 × 6 miles, divided into 36 one-square-mile sections — correct.",k:true},
- {t:"16",e:"Incorrect.",k:false},
- {t:"640",e:"640 is the number of acres in a section.",k:false},
- {t:"100",e:"Incorrect.",k:false}]},
-
-{d:"Legal Descriptions",q:"The 'lot and block' method describes property by reference to:",ch:[
- {t:"A recorded subdivision plat map",e:"Lot and block references a recorded subdivision map — correct.",k:true},
- {t:"Township and range lines",e:"That's the rectangular survey.",k:false},
- {t:"Metes and bounds calls",e:"That's a separate method.",k:false},
- {t:"The public land survey baseline",e:"Baselines are part of the rectangular survey.",k:false}]},
-
-{d:"Legal Descriptions",q:"Which method is most commonly used to describe lots in a platted urban subdivision?",ch:[
- {t:"Lot and block",e:"Lot and block is standard for recorded subdivisions — correct.",k:true},
- {t:"Metes and bounds",e:"That's used for irregular parcels.",k:false},
- {t:"Government survey",e:"That covers large rural tracts.",k:false},
- {t:"GPS coordinates only",e:"Coordinates alone are not the standard recorded description.",k:false}]},
-
-/* ---------- REAL ESTATE APPRAISAL (5) ---------- */
+/* === XVI. REAL ESTATE APPRAISAL (8) === */
 {d:"Real Estate Appraisal",q:"The three approaches to estimating value are sales comparison, cost, and:",ch:[
  {t:"Income",e:"The income approach is the third method, used for income property — correct.",k:true},
  {t:"Assessment",e:"Assessment is for taxation, not appraisal.",k:false},
@@ -593,10 +650,10 @@ const BANK = [
  {t:"Replacement",e:"Replacement cost is a component of the cost approach, not a separate approach.",k:false}]},
 
 {d:"Real Estate Appraisal",q:"In the income approach, value is calculated as:",ch:[
- {t:"Net Operating Income ÷ Capitalization Rate",e:"Value = NOI ÷ cap rate — correct.",k:true},
- {t:"NOI × Capitalization Rate",e:"Multiplying inverts the relationship.",k:false},
- {t:"Gross Income × Cost",e:"Not a valuation formula.",k:false},
- {t:"Price ÷ Monthly Rent",e:"That's a gross rent multiplier, a different tool.",k:false}]},
+ {t:"Net Operating Income / Capitalization Rate",e:"Value = NOI divided by the cap rate — correct.",k:true},
+ {t:"NOI x Capitalization Rate",e:"Multiplying inverts the relationship.",k:false},
+ {t:"Gross Income x Cost",e:"Not a valuation formula.",k:false},
+ {t:"Price / Monthly Rent",e:"That is a gross rent multiplier, a different tool.",k:false}]},
 
 {d:"Real Estate Appraisal",q:"The principle that a buyer will pay no more than the cost of an equally desirable substitute is the principle of:",ch:[
  {t:"Substitution",e:"Substitution sets the upper limit of value at the cost of an equivalent alternative — correct.",k:true},
@@ -616,129 +673,72 @@ const BANK = [
  {t:"Illegal for licensees to prepare",e:"Licensees may prepare CMAs.",k:false},
  {t:"Equivalent to a USPAP appraisal",e:"A CMA does not meet formal USPAP appraisal standards.",k:false}]},
 
-/* ---------- REAL ESTATE LICENSE LAW & COMMISSION RULES (3) ---------- */
-{d:"License Law & Commission Rules",q:"The Florida Real Estate Commission (FREC) is composed of how many members?",ch:[
- {t:"7 members",e:"FREC has 7 members appointed by the Governor — correct.",k:true},
- {t:"5 members",e:"Incorrect — FREC has 7.",k:false},
- {t:"9 members",e:"Incorrect — FREC has 7.",k:false},
- {t:"11 members",e:"Incorrect — FREC has 7.",k:false}]},
+{d:"Real Estate Appraisal",q:"The sales comparison approach is BEST suited for valuing:",ch:[
+ {t:"Single-family homes",e:"Sales comparison works best where similar recent sales exist, such as homes — correct.",k:true},
+ {t:"A unique public library",e:"Unique/special-purpose properties rely on the cost approach.",k:false},
+ {t:"An apartment complex",e:"Income property is best valued by the income approach.",k:false},
+ {t:"A special-purpose factory",e:"Special-purpose buildings use the cost approach.",k:false}]},
 
-{d:"License Law & Commission Rules",q:"FREC operates within which state department?",ch:[
- {t:"Department of Business and Professional Regulation (DBPR)",e:"FREC sits in the DBPR's Division of Real Estate — correct.",k:true},
- {t:"Department of Revenue",e:"That handles taxes.",k:false},
- {t:"HUD",e:"HUD is a federal agency.",k:false},
- {t:"Department of State",e:"That handles other matters.",k:false}]},
+{d:"Real Estate Appraisal",q:"The cost approach is MOST appropriate for:",ch:[
+ {t:"New or special-purpose properties, such as a school",e:"The cost approach suits new/special-purpose buildings with few comparables — correct.",k:true},
+ {t:"A typical resale home",e:"Typical homes use sales comparison.",k:false},
+ {t:"A rental apartment building",e:"Rentals use the income approach.",k:false},
+ {t:"Vacant land by itself",e:"Land is valued separately; the cost approach values improvements plus land.",k:false}]},
 
-{d:"License Law & Commission Rules",q:"FREC members serve terms of:",ch:[
- {t:"4 years",e:"FREC members serve 4-year terms — correct.",k:true},
- {t:"2 years",e:"Incorrect term length.",k:false},
- {t:"6 years",e:"Incorrect term length.",k:false},
- {t:"Life",e:"Terms are limited, not for life.",k:false}]},
+{d:"Real Estate Appraisal",q:"The 'highest and best use' of a property is the use that is:",ch:[
+ {t:"Legally permitted, physically possible, financially feasible, and most productive",e:"Highest and best use must meet all four tests — correct.",k:true},
+ {t:"Whatever the current owner prefers",e:"Owner preference does not define it.",k:false},
+ {t:"Always residential",e:"It varies by property; not always residential.",k:false},
+ {t:"The cheapest use to develop",e:"It is the most productive use, not the cheapest.",k:false}]},
 
-/* ---------- FEDERAL & STATE LAWS PERTAINING TO REAL ESTATE (3) ---------- */
-{d:"Federal & State Laws",q:"The federal Fair Housing Act prohibits discrimination based on all of the following EXCEPT:",ch:[
- {t:"Occupation",e:"Occupation is not a protected class under the Fair Housing Act — correct answer.",k:true},
- {t:"Race",e:"Race is a protected class.",k:false},
- {t:"Religion",e:"Religion is a protected class.",k:false},
- {t:"Familial status",e:"Familial status is a protected class.",k:false}]},
-
-{d:"Federal & State Laws",q:"Steering, blockbusting, and redlining are prohibited by the:",ch:[
- {t:"Fair Housing Act",e:"These discriminatory practices violate the Fair Housing Act — correct.",k:true},
- {t:"RESPA",e:"RESPA addresses settlement costs and kickbacks.",k:false},
- {t:"Statute of Frauds",e:"That concerns written contracts.",k:false},
- {t:"Regulation Z",e:"Reg Z governs lending disclosures.",k:false}]},
-
-{d:"Federal & State Laws",q:"RESPA primarily regulates:",ch:[
- {t:"Settlement (closing) costs and prohibits kickbacks",e:"RESPA governs disclosure of settlement costs and bans referral kickbacks — correct.",k:true},
- {t:"Property tax rates",e:"Tax rates are set locally.",k:false},
- {t:"Zoning decisions",e:"Zoning is a local government function.",k:false},
- {t:"Appraiser licensing",e:"Appraisal licensing is separate.",k:false}]},
-
-/* ---------- TITLES, DEEDS & OWNERSHIP RESTRICTIONS (3) ---------- */
-{d:"Titles & Deeds",q:"Which deed gives the buyer (grantee) the GREATEST protection?",ch:[
- {t:"General warranty deed",e:"It includes the fullest covenants protecting against all title defects — correct.",k:true},
- {t:"Quitclaim deed",e:"A quitclaim conveys only whatever interest the grantor has, with no warranties.",k:false},
- {t:"Special warranty deed",e:"It covers only the grantor's period of ownership.",k:false},
- {t:"Bargain and sale deed",e:"It implies ownership but offers limited warranties.",k:false}]},
-
-{d:"Titles & Deeds",q:"A deed that conveys only whatever interest the grantor may have, with no warranties, is a:",ch:[
- {t:"Quitclaim deed",e:"It transfers any interest the grantor holds with no guarantees — correct.",k:true},
- {t:"General warranty deed",e:"That carries full covenants.",k:false},
- {t:"Special warranty deed",e:"That warrants only the grantor's ownership period.",k:false},
- {t:"Trustee's deed",e:"A trustee's deed conveys trust property by a trustee.",k:false}]},
-
-{d:"Titles & Deeds",q:"For a deed to be valid, it must be:",ch:[
- {t:"In writing and signed by the grantor",e:"A valid deed must be written and signed by the grantor (plus delivery and acceptance) — correct.",k:true},
- {t:"Signed by the grantee",e:"The grantee need not sign the deed.",k:false},
- {t:"Notarized by the buyer",e:"Notarization is for recording and isn't done by the buyer.",k:false},
- {t:"Recorded to be valid between the parties",e:"Recording gives public notice but isn't required for validity between the parties.",k:false}]},
-
-/* ---------- PLANNING & ZONING (3) ---------- */
-{d:"Planning & Zoning",q:"Permission to deviate from a specific zoning requirement (like a setback) due to hardship is a:",ch:[
- {t:"Variance",e:"A variance permits a specific deviation based on hardship — correct.",k:true},
- {t:"Nonconforming use",e:"That predates the current zoning and is grandfathered.",k:false},
- {t:"Special exception",e:"That is a use allowed conditionally within the zoning.",k:false},
- {t:"Rezoning",e:"Rezoning changes the zoning classification itself.",k:false}]},
-
-{d:"Planning & Zoning",q:"A use that legally existed before a zoning change and is allowed to continue is a:",ch:[
- {t:"Legal nonconforming use (grandfathered)",e:"It lawfully predates the new zoning and may continue — correct.",k:true},
- {t:"Variance",e:"A variance is newly granted relief.",k:false},
- {t:"Spot zoning",e:"Spot zoning singles out a parcel for different treatment.",k:false},
- {t:"Special exception",e:"That is a conditionally permitted use.",k:false}]},
-
-{d:"Planning & Zoning",q:"The government's power to take private property for public use with just compensation is:",ch:[
- {t:"Eminent domain (exercised through condemnation)",e:"Eminent domain lets government take property for public use with compensation — correct.",k:true},
- {t:"Escheat",e:"Escheat returns property to the state when an owner dies without heirs.",k:false},
- {t:"Police power",e:"Police power regulates use (zoning) without taking title.",k:false},
- {t:"Taxation",e:"Taxation funds government but isn't a taking of the property.",k:false}]},
-
-/* ---------- REAL ESTATE INVESTMENTS & BUSINESS OPPORTUNITY (2) ---------- */
-{d:"Investments & Business Opportunity",q:"In real estate investing, 'leverage' means:",ch:[
+/* === XVII. REAL ESTATE INVESTMENTS & BUSINESS OPPORTUNITY (2) === */
+{d:"Investments & Business Opp.",q:"In real estate investing, 'leverage' means:",ch:[
  {t:"Using borrowed money to increase potential return",e:"Leverage uses financing so smaller equity controls a larger asset, amplifying returns — correct.",k:true},
  {t:"Paying all cash to avoid risk",e:"All-cash is the opposite of leverage.",k:false},
  {t:"Selling below market value",e:"Leverage is unrelated to selling below market.",k:false},
  {t:"Avoiding any financing",e:"Leverage specifically relies on financing.",k:false}]},
 
-{d:"Investments & Business Opportunity",q:"The capitalization rate measures:",ch:[
- {t:"The relationship between a property's NOI and its value",e:"Cap rate = NOI ÷ value, expressing the rate of return — correct.",k:true},
- {t:"The loan's interest rate",e:"That's the mortgage rate.",k:false},
+{d:"Investments & Business Opp.",q:"The capitalization rate measures:",ch:[
+ {t:"The relationship between a property's NOI and its value",e:"Cap rate = NOI / value, expressing the rate of return — correct.",k:true},
+ {t:"The loan's interest rate",e:"That is the mortgage rate.",k:false},
  {t:"The property tax rate",e:"The tax rate is unrelated.",k:false},
  {t:"The commission percentage",e:"Commission is a brokerage fee, not a cap rate.",k:false}]},
 
-/* ---------- THE REAL ESTATE BUSINESS (2) ---------- */
-{d:"The Real Estate Business",q:"Property management, appraisal, financing, and brokerage are examples of:",ch:[
- {t:"Specialized areas within the real estate business",e:"These are recognized specializations within the industry — correct.",k:true},
- {t:"Government agencies",e:"They are professional fields, not agencies.",k:false},
- {t:"Types of deeds",e:"Deeds are title documents.",k:false},
- {t:"Financing instruments",e:"They are business areas, not financing instruments.",k:false}]},
+/* === XVIII. TAXES AFFECTING REAL ESTATE (3) === */
+{d:"Taxes Affecting Real Estate",q:"Ad valorem property taxes are based on:",ch:[
+ {t:"The assessed value of the property",e:"Ad valorem means 'according to value' — correct.",k:true},
+ {t:"The square footage only",e:"Size influences value but is not the tax base directly.",k:false},
+ {t:"The owner's income",e:"Property tax is not income-based.",k:false},
+ {t:"The latest sale price only",e:"Assessed value, not just the last sale price, sets the base.",k:false}]},
 
-{d:"The Real Estate Business",q:"Which set of physical characteristics best describes land?",ch:[
- {t:"Immobile, indestructible, and unique",e:"Land is immobile, indestructible, and nonhomogeneous (unique) — correct.",k:true},
- {t:"Easily moved like personal property",e:"Land is immobile, unlike personal property.",k:false},
- {t:"Always identical to other parcels",e:"Every parcel is unique (nonhomogeneity).",k:false},
- {t:"A type of chattel",e:"Chattel is personal property, not land.",k:false}]},
+{d:"Taxes Affecting Real Estate",q:"One mill equals:",ch:[
+ {t:"$1 per $1,000 of value ($0.001)",e:"A mill is one-thousandth of a dollar, or $1 per $1,000 — correct.",k:true},
+ {t:"$1 per $100",e:"$1 per $100 would be 10 mills.",k:false},
+ {t:"$10 per $1,000",e:"That is 10 mills.",k:false},
+ {t:"1% of value",e:"1% equals 10 mills, not one.",k:false}]},
 
-/* ---------- REAL ESTATE MARKETS & ANALYSIS (2) ---------- */
-{d:"Markets & Analysis",q:"When the supply of homes exceeds buyer demand, prices generally:",ch:[
- {t:"Fall, creating a buyer's market",e:"Excess supply relative to demand pushes prices down — correct.",k:true},
- {t:"Rise sharply",e:"Prices rise when demand exceeds supply.",k:false},
- {t:"Stay fixed by law",e:"Prices aren't legally fixed.",k:false},
- {t:"Are set by FREC",e:"FREC regulates licensees, not market prices.",k:false}]},
+{d:"Taxes Affecting Real Estate",q:"Florida's homestead exemption can reduce a primary residence's taxable value by up to:",ch:[
+ {t:"$50,000 (in two $25,000 tiers)",e:"A first $25,000 (all taxes) plus a second $25,000 (non-school) totals up to $50,000 — correct.",k:true},
+ {t:"$25,000 only",e:"That is only the first tier.",k:false},
+ {t:"$100,000",e:"Exceeds the homestead amount.",k:false},
+ {t:"$5,000",e:"$5,000 is the widow/widower or disability exemption, not homestead.",k:false}]},
 
-{d:"Markets & Analysis",q:"Real estate markets are considered 'local' primarily because:",ch:[
- {t:"Land is immobile and conditions vary by area",e:"Because land can't be moved, supply, demand, and prices differ by locality — correct.",k:true},
- {t:"Federal law requires it",e:"No federal law dictates this.",k:false},
- {t:"All prices are identical nationwide",e:"Prices vary widely by location.",k:false},
- {t:"Brokers set national prices",e:"Brokers don't set national prices.",k:false}]}
+/* === XIX. PLANNING & ZONING (1) === */
+{d:"Planning & Zoning",q:"Permission to deviate from a specific zoning requirement (like a setback) due to hardship is a:",ch:[
+ {t:"Variance",e:"A variance permits a specific deviation based on hardship — correct.",k:true},
+ {t:"Nonconforming use",e:"That predates the current zoning and is grandfathered.",k:false},
+ {t:"Special exception",e:"That is a use allowed conditionally within the zoning.",k:false},
+ {t:"Rezoning",e:"Rezoning changes the zoning classification itself.",k:false}]}
+
 ];
 
 /* ===================== QUIZ ENGINE ===================== */
 const LETTERS=["A","B","C","D"];
 const PASS=75;
 let order=[], cur=0, score=0, answered=0;
-let results=[]; // {domain, correct:bool}
+let results=[];
 
-function shuffle(a){ // Fisher-Yates
+function shuffle(a){
   const arr=a.slice();
   for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
   return arr;
@@ -773,7 +773,6 @@ function render(){
       <button class="btn next" id="nextBtn">${cur+1<total?'Next Question →':'See My Results →'}</button>
     </div>`;
 
-  // fill explanations text (hidden until answered)
   item.ch.forEach((c,idx)=>{ document.getElementById("expl-"+idx).textContent=c.e; });
 
   document.querySelectorAll("#choices .choice").forEach(el=>{
@@ -785,19 +784,18 @@ function render(){
 
 function onAnswer(el){
   const choices=document.getElementById("choices");
-  if(choices.classList.contains("answered")) return; // lock after first answer
+  if(choices.classList.contains("answered")) return;
   choices.classList.add("answered");
   const picked = el.dataset.correct==="true";
   answered++;
   if(picked) score++;
   results.push({domain:order[cur].d, correct:picked});
 
-  // color every choice: correct -> green, the wrong one you picked -> red
   document.querySelectorAll("#choices .choice").forEach(c=>{
     if(c.dataset.correct==="true") c.classList.add("correct");
     else c.classList.add("dim");
   });
-  if(!picked) el.classList.remove("dim"), el.classList.add("wrong");
+  if(!picked){ el.classList.remove("dim"); el.classList.add("wrong"); }
 
   const v=document.getElementById("verdict");
   v.textContent = picked ? "✓ Correct" : "✗ Incorrect";
@@ -817,7 +815,6 @@ function showResults(){
   const pct=Math.round(score/order.length*100);
   const pass=pct>=PASS;
 
-  // per-domain tally
   const dom={};
   results.forEach(r=>{
     dom[r.domain]=dom[r.domain]||{c:0,t:0};
@@ -842,20 +839,20 @@ function showResults(){
       <div>${score} of ${order.length} correct</div>
       <div class="result-sub">${pass
         ? "Above the 75% passing line — nice work. Run it again to stay sharp."
-        : `You need 75% to pass. You're ${PASS-pct>0?(PASS-pct)+' points':'almost'} away — focus on the red rows below.`}</div>
+        : `You need 75% to pass — about ${Math.max(1,PASS-pct)} points away. Focus on the red rows below.`}</div>
     </div>
     <h3 class="bd">Your score by topic (weakest first)</h3>
     <table class="dom">${rows}</table>
     <div class="nav" style="margin-top:22px;">
       <button class="btn secondary" onclick="location.reload()">↻ Retake (questions reshuffle)</button>
     </div>
-    <p class="footnote">100-question Florida Sales Associate practice exam. Questions are reshuffled each attempt.
-    Study tool only — not affiliated with DBPR or Pearson VUE. Verify current statutes/figures before relying on them.</p>`;
+    <p class="footnote">100-question Florida Sales Associate practice exam. Question counts mirror the official
+    DBPR Candidate Information Booklet content outline (19 areas). Questions reshuffle each attempt.
+    Study tool only — not affiliated with DBPR or Pearson VUE; verify current statutes and figures before relying on them.</p>`;
   document.getElementById("liveScore").textContent=`Score: ${score}/${order.length}`;
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
-/* start */
 buildOrder();
 render();
 </script>
