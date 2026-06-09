@@ -107,7 +107,9 @@
   <div class="progress"><div id="progressBar"></div></div>
 </header>
 
-<div class="switch"><a href="full.html">Switch to Full 100-Question Mock Exam →</a></div>
+<div class="switch">
+  <a class="cur" href="index.html" style="color:#088395;text-decoration:underline;">Drill A</a> &nbsp;·&nbsp; <a href="drill2.html">Drill B</a> &nbsp;·&nbsp; <a href="full.html">Full Mock</a>
+</div>
 
 <main>
   <div id="quiz"></div>
@@ -573,7 +575,8 @@ function showResults(){
     </div>
     <p class="footnote">Focused weak-areas drill (50 Q), built from the latest score report. Math questions show a
     step-by-step worked solution. Questions reshuffle each attempt.
-    <br><a href="full.html" style="color:#088395;font-weight:700;">Take the full 100-question mock exam →</a><br>
+    <br><a href="drill2.html" style="color:#088395;font-weight:700;">Drill B (50 more)</a> &nbsp;·&nbsp;
+    <a href="full.html" style="color:#088395;font-weight:700;">Full 100-question mock exam</a><br>
     Study tool only — not affiliated with DBPR or Pearson VUE; verify current statutes and figures before relying on them.</p>`;
   document.getElementById("liveScore").textContent=`Score: ${score}/${order.length}`;
   window.scrollTo({top:0,behavior:"smooth"});

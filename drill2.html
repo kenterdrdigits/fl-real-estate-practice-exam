@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0a4d68">
+<title>FL Real Estate — Focused Weak-Areas Drill, Set B (50 Q)</title>
+<style>
+  :root{
+    --navy:#0a4d68; --teal:#088395; --sky:#05bfdb; --bg:#f3f6f8;
+    --green:#1e8e3e; --green-bg:#e6f4ea; --green-bd:#34a853;
+    --red:#c5221f; --red-bg:#fce8e6; --red-bd:#ea4335;
+    --ink:#1f2d33; --muted:#5f7178; --card:#ffffff; --line:#dde6ea;
+    --amber:#946200; --amber-bg:#fff6e0; --amber-bd:#f0c14b;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.45;
+    padding:0 0 40px; -webkit-font-smoothing:antialiased;
+  }
+  header{
+    background:linear-gradient(135deg,var(--navy),var(--teal));
+    color:#fff; padding:16px 18px 14px; position:sticky; top:0; z-index:10;
+    box-shadow:0 2px 10px rgba(0,0,0,.12);
+  }
+  header h1{font-size:15px; margin:0 0 10px; font-weight:700; letter-spacing:.2px;}
+  .meta{display:flex; justify-content:space-between; align-items:center; font-size:13px; font-weight:600;}
+  .meta .score{background:rgba(255,255,255,.18); padding:3px 10px; border-radius:20px;}
+  .progress{height:7px; background:rgba(255,255,255,.25); border-radius:6px; margin-top:10px; overflow:hidden;}
+  .progress > div{height:100%; width:0; background:var(--sky); border-radius:6px; transition:width .3s ease;}
+  .switch{text-align:center;padding:9px 12px;background:#e3f2f5;font-size:13px;}
+  .switch a{color:var(--navy);font-weight:700;text-decoration:none;}
+  .switch a.cur{color:var(--teal);text-decoration:underline;}
+  main{max-width:680px; margin:0 auto; padding:18px 16px 0;}
+  .domain{display:inline-block; font-size:11px; font-weight:700; text-transform:uppercase;
+    letter-spacing:.5px; color:var(--teal); background:#e3f2f5; padding:4px 9px; border-radius:6px; margin-bottom:12px;}
+  .qtext{font-size:18px; font-weight:600; margin:0 0 18px; line-height:1.4;}
+  .choices{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:11px;}
+  .choice{
+    display:flex; align-items:flex-start; gap:11px; background:var(--card);
+    border:2px solid var(--line); border-radius:13px; padding:14px 15px; cursor:pointer;
+    font-size:16px; transition:border-color .15s, background .15s; user-select:none;
+  }
+  .choice:active{transform:scale(.995);}
+  .choice .letter{
+    flex:0 0 26px; height:26px; border-radius:50%; background:#eef3f5; color:var(--navy);
+    font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center; margin-top:1px;
+  }
+  .choice .ctext{flex:1;}
+  .choice.correct{border-color:var(--green-bd); background:var(--green-bg);}
+  .choice.correct .letter{background:var(--green-bd); color:#fff;}
+  .choice.wrong{border-color:var(--red-bd); background:var(--red-bg);}
+  .choice.wrong .letter{background:var(--red-bd); color:#fff;}
+  .choice.dim{opacity:.85;}
+  .answered .choice{cursor:default;}
+  .expl{font-size:13.5px; margin-top:9px; padding-left:37px; display:none; line-height:1.4;}
+  .answered .expl{display:block;}
+  .expl.good{color:var(--green);}
+  .expl.bad{color:var(--red);}
+  .verdict{margin:18px 0 4px; font-weight:700; font-size:16px; display:none;}
+  .answered .verdict{display:block;}
+  .verdict.good{color:var(--green);} .verdict.bad{color:var(--red);}
+  .work{display:none; margin:14px 0 2px; background:var(--amber-bg); border:1.5px solid var(--amber-bd);
+    border-radius:12px; padding:13px 15px;}
+  .answered .work{display:block;}
+  .work .wt{font-weight:800; font-size:13px; color:var(--amber); text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px;}
+  .work ol{margin:0; padding-left:20px;}
+  .work li{font-size:14.5px; margin:5px 0; line-height:1.5; font-variant-numeric:tabular-nums;}
+  .work li b{color:var(--ink);}
+  .nav{margin:22px 0 8px; display:flex; gap:12px;}
+  button.btn{
+    flex:1; border:none; border-radius:12px; padding:15px; font-size:16px; font-weight:700;
+    background:var(--navy); color:#fff; cursor:pointer; transition:opacity .15s, background .15s;
+  }
+  button.btn.secondary{background:#e0e8ec; color:var(--navy);}
+  button.btn.next{display:none;}
+  .answered ~ .nav button.btn.next{display:block;}
+  #results{display:none;}
+  .result-card{background:var(--card); border-radius:16px; padding:24px 20px; text-align:center; box-shadow:0 2px 10px rgba(0,0,0,.06);}
+  .result-score{font-size:54px; font-weight:800; margin:6px 0;}
+  .result-card.pass .result-score{color:var(--green);}
+  .result-card.fail .result-score{color:var(--red);}
+  .result-badge{display:inline-block; font-size:15px; font-weight:800; padding:7px 18px; border-radius:30px; text-transform:uppercase; letter-spacing:1px;}
+  .result-card.pass .result-badge{background:var(--green-bg); color:var(--green);}
+  .result-card.fail .result-badge{background:var(--red-bg); color:var(--red);}
+  .result-sub{color:var(--muted); font-size:14px; margin-top:10px;}
+  h3.bd{font-size:15px; margin:26px 0 10px; color:var(--navy);}
+  table.dom{width:100%; border-collapse:collapse; font-size:13.5px; background:var(--card); border-radius:12px; overflow:hidden;}
+  table.dom td{padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:middle;}
+  table.dom tr:last-child td{border-bottom:none;}
+  table.dom td.pct{text-align:right; font-weight:700; white-space:nowrap;}
+  .pct.lo{color:var(--red);} .pct.mid{color:#c77800;} .pct.hi{color:var(--green);}
+  .barwrap{background:#eef3f5; height:6px; border-radius:4px; margin-top:5px; overflow:hidden;}
+  .barwrap>div{height:100%; border-radius:4px;}
+  .footnote{font-size:12px; color:var(--muted); text-align:center; margin:24px 8px 0; line-height:1.5;}
+</style>
+</head>
+<body>
+<header>
+  <h1>FL Sales Associate — Weak-Areas Drill (Set B)</h1>
+  <div class="meta">
+    <span id="counter">Question 1 of 50</span>
+    <span class="score" id="liveScore">Score: 0/0</span>
+  </div>
+  <div class="progress"><div id="progressBar"></div></div>
+</header>
+
+<div class="switch">
+  <a href="index.html">Drill A</a> &nbsp;·&nbsp; <a class="cur" href="drill2.html">Drill B</a> &nbsp;·&nbsp; <a href="full.html">Full Mock</a>
+</div>
+
+<main>
+  <div id="quiz"></div>
+  <div id="results"></div>
+</main>
+
+<script>
+/* =========================================================================
+   FOCUSED WEAK-AREAS DRILL — SET B (50 Q). All-new questions/numbers vs Set A.
+   Same weak-area focus + step-by-step worked math (the `work` array).
+   Choice: t=text, e=why right/wrong, k=correct.  Optional work=[steps].
+   ========================================================================= */
+const BANK = [
+
+/* ===== COMPUTATIONS & CLOSING (12) ===== */
+{d:"Computations & Closing",q:"A property sells for $356,250. Deed doc stamps are $0.70 per $100, and any fraction of $100 rounds UP. The deed doc-stamp tax is:",
+ work:["Round price UP to the next $100: $356,250 → <b>$356,300</b>","$356,300 ÷ $100 = <b>3,563</b> units","3,563 × $0.70 = <b>$2,494.10</b>"],ch:[
+ {t:"$2,494.10",e:"After rounding up to $356,300, 3,563 × $0.70 = $2,494.10 — correct.",k:true},
+ {t:"$2,493.75",e:"This skipped rounding the fraction up to the next $100.",k:false},
+ {t:"$1,247.05",e:"That uses the $0.35 note rate instead of the $0.70 deed rate.",k:false},
+ {t:"$3,563.00",e:"That is the unit count, not the tax.",k:false}]},
+
+{d:"Computations & Closing",q:"A buyer signs a new $228,000 promissory note. Note doc stamps are $0.35 per $100. The note doc-stamp tax is:",
+ work:["$228,000 ÷ $100 = <b>2,280</b> units","2,280 × $0.35 = <b>$798.00</b>"],ch:[
+ {t:"$798.00",e:"2,280 × $0.35 = $798 — correct.",k:true},
+ {t:"$1,596.00",e:"That uses the $0.70 DEED rate, not the note rate.",k:false},
+ {t:"$456.00",e:"That is the intangible tax ($0.002), a separate charge.",k:false},
+ {t:"$79.80",e:"Decimal slip — the rate is $0.35, not $0.035, per $100.",k:false}]},
+
+{d:"Computations & Closing",q:"A home sells for $450,000 with a new $360,000 mortgage. Find the COMBINED deed stamps ($0.70/$100) + note stamps ($0.35/$100) + intangible tax ($0.002).",
+ work:["Deed: 4,500 × $0.70 = <b>$3,150</b>","Note: 3,600 × $0.35 = <b>$1,260</b>","Intangible: $360,000 × 0.002 = <b>$720</b>","Total = $3,150 + $1,260 + $720 = <b>$5,130</b>"],ch:[
+ {t:"$5,130",e:"$3,150 + $1,260 + $720 = $5,130 — correct.",k:true},
+ {t:"$4,410",e:"That omits the $720 intangible tax.",k:false},
+ {t:"$3,150",e:"That is only the deed stamps.",k:false},
+ {t:"$5,850",e:"That applies the $0.70 deed rate to the loan amounts too.",k:false}]},
+
+{d:"Computations & Closing",q:"A seller PREPAID the full $3,650 annual tax (365-day method). At closing the buyer will own the property for 200 days of the year. The proration is:",
+ work:["Daily rate = $3,650 ÷ 365 = <b>$10.00/day</b>","Buyer's 200 days: 200 × $10 = <b>$2,000</b>","Seller already paid → buyer reimburses → <b>CREDIT seller, DEBIT buyer</b>"],ch:[
+ {t:"$2,000 credit to the seller",e:"Seller prepaid, so the buyer reimburses the seller's 200-day share — credit seller / debit buyer, correct.",k:true},
+ {t:"$2,000 debit to the seller",e:"Direction is reversed — a prepaid item is a credit to the seller.",k:false},
+ {t:"$1,650 credit to the seller",e:"That uses 165 days; the buyer owns 200 days.",k:false},
+ {t:"$10 credit to the seller",e:"$10 is only the daily rate, not the 200-day total.",k:false}]},
+
+{d:"Computations & Closing",q:"A listing broker earned a total commission of $19,500 at a 6% rate. The property's sale price was:",
+ work:["Sale price = commission ÷ rate","$19,500 ÷ 0.06 = <b>$325,000</b>"],ch:[
+ {t:"$325,000",e:"$19,500 ÷ 0.06 = $325,000 — correct.",k:true},
+ {t:"$1,170",e:"That multiplies by 6% again instead of dividing.",k:false},
+ {t:"$32,500",e:"Off by a factor of 10.",k:false},
+ {t:"$292,500",e:"That subtracts the commission instead of solving for price.",k:false}]},
+
+{d:"Computations & Closing",q:"A home sells for $500,000 at a 5% total commission, split 50/50 between the two brokers. The listing broker pays its associate 55% of its half. The associate receives:",
+ work:["Total commission: $500,000 × 0.05 = <b>$25,000</b>","Listing side's half: $25,000 ÷ 2 = <b>$12,500</b>","Associate's 55%: $12,500 × 0.55 = <b>$6,875</b>"],ch:[
+ {t:"$6,875",e:"55% of the $12,500 half = $6,875 — correct.",k:true},
+ {t:"$12,500",e:"That is the full half, before the associate's 55% split.",k:false},
+ {t:"$5,625",e:"That is the broker's retained 45%, not the associate's share.",k:false},
+ {t:"$13,750",e:"That takes 55% of the entire commission, not one half.",k:false}]},
+
+{d:"Computations & Closing",q:"A seller sells for $318,000 and pays a 6% commission (no other costs). The seller's NET proceeds are:",
+ work:["Commission = $318,000 × 0.06 = <b>$19,080</b>","Net = $318,000 − $19,080 = <b>$298,920</b>"],ch:[
+ {t:"$298,920",e:"$318,000 − $19,080 commission = $298,920 — correct.",k:true},
+ {t:"$19,080",e:"That is the commission, not the net.",k:false},
+ {t:"$336,080",e:"That ADDS the commission instead of subtracting it.",k:false},
+ {t:"$299,880",e:"That uses a 5.7% commission, not 6%.",k:false}]},
+
+{d:"Computations & Closing",q:"A buyer gets a $238,000 loan on a home that costs $280,000. The loan-to-value (LTV) ratio is:",
+ work:["LTV = loan ÷ value","$238,000 ÷ $280,000 = 0.85 = <b>85%</b>"],ch:[
+ {t:"85%",e:"$238,000 ÷ $280,000 = 85% — correct.",k:true},
+ {t:"15%",e:"15% is the down-payment percentage, not the LTV.",k:false},
+ {t:"117.6%",e:"That divides value by loan instead of loan by value.",k:false},
+ {t:"80%",e:"Close, but the exact ratio here is 85%.",k:false}]},
+
+{d:"Computations & Closing",q:"A loan balance is $200,000 at a 6% annual interest rate. The interest portion of the FIRST monthly payment is:",
+ work:["Annual interest = $200,000 × 0.06 = <b>$12,000</b>","Monthly interest = $12,000 ÷ 12 = <b>$1,000</b>"],ch:[
+ {t:"$1,000",e:"$12,000 annual ÷ 12 = $1,000 for the first month — correct.",k:true},
+ {t:"$12,000",e:"That is a full year's interest, not one month.",k:false},
+ {t:"$100",e:"Off by a factor of 10.",k:false},
+ {t:"$1,200",e:"That uses a 7.2% rate, not 6%.",k:false}]},
+
+{d:"Computations & Closing",q:"A rectangular lot measures 200 ft by 435.6 ft. Its size in acres is: (1 acre = 43,560 sq ft)",
+ work:["Area = 200 × 435.6 = <b>87,120 sq ft</b>","Acres = 87,120 ÷ 43,560 = <b>2 acres</b>"],ch:[
+ {t:"2 acres",e:"87,120 sq ft ÷ 43,560 = 2 acres — correct.",k:true},
+ {t:"1 acre",e:"That would be only 43,560 sq ft.",k:false},
+ {t:"4 acres",e:"That doubles the actual area.",k:false},
+ {t:"0.5 acre",e:"Far too small for 87,120 sq ft.",k:false}]},
+
+{d:"Computations & Closing",q:"A tenant pays $1,800 monthly rent on the 1st. The property closes on the 10th of a 30-day month; the buyer owns the last 20 days. The rent proration is:",
+ work:["Daily rent = $1,800 ÷ 30 = <b>$60/day</b>","Buyer's 20 days: 20 × $60 = <b>$1,200</b>","Seller already collected the rent → <b>CREDIT buyer, DEBIT seller</b>"],ch:[
+ {t:"$1,200 credit to the buyer",e:"Seller collected the rent, so the buyer is credited their 20-day share — correct.",k:true},
+ {t:"$1,200 credit to the seller",e:"Reversed — the seller already has the cash, so it credits the buyer.",k:false},
+ {t:"$600 credit to the buyer",e:"That uses 10 days; the buyer owns 20 days.",k:false},
+ {t:"$1,800 credit to the buyer",e:"That gives the buyer the whole month instead of 20 days.",k:false}]},
+
+{d:"Computations & Closing",q:"A buyer purchases at $300,000 with an 80% loan, pays $4,000 in closing costs, and already put down $5,000 earnest money. The cash still needed at closing is:",
+ work:["Down payment = $300,000 × 20% = <b>$60,000</b>","Add closing costs: $60,000 + $4,000 = <b>$64,000</b>","Subtract earnest money already paid: $64,000 − $5,000 = <b>$59,000</b>"],ch:[
+ {t:"$59,000",e:"$60,000 down + $4,000 costs − $5,000 earnest = $59,000 — correct.",k:true},
+ {t:"$64,000",e:"That forgets to credit the $5,000 earnest money already paid.",k:false},
+ {t:"$60,000",e:"That is only the down payment, ignoring costs and the deposit.",k:false},
+ {t:"$69,000",e:"That adds the earnest money instead of subtracting it.",k:false}]},
+
+/* ===== TAXES AFFECTING REAL ESTATE (6) ===== */
+{d:"Taxes Affecting Real Estate",q:"A home is assessed at $290,000 with $55,000 in total exemptions, taxed at 20 mills. The annual tax is:",
+ work:["Taxable value = $290,000 − $55,000 = <b>$235,000</b>","20 mills = <b>$0.020</b> per $1","$235,000 × 0.020 = <b>$4,700</b>"],ch:[
+ {t:"$4,700",e:"$235,000 taxable × 0.020 = $4,700 — correct.",k:true},
+ {t:"$4,800",e:"That subtracts only a $50,000 exemption, not the full $55,000.",k:false},
+ {t:"$5,800",e:"That forgets the exemptions entirely.",k:false},
+ {t:"$470",e:"That uses 2 mills instead of 20.",k:false}]},
+
+{d:"Taxes Affecting Real Estate",q:"A millage rate of 15 mills equals what percentage of taxable value?",
+ work:["1 mill = $0.001 = <b>0.1%</b>","15 mills = 15 × 0.1% = <b>1.5%</b>"],ch:[
+ {t:"1.5%",e:"15 mills = 1.5% of taxable value — correct.",k:true},
+ {t:"15%",e:"That treats a mill as 1%, but a mill is 0.1%.",k:false},
+ {t:"0.15%",e:"Off by a factor of 10.",k:false},
+ {t:"150%",e:"Far too large.",k:false}]},
+
+{d:"Taxes Affecting Real Estate",q:"When Florida property taxes go unpaid, the county collects by selling a:",ch:[
+ {t:"Tax certificate",e:"Counties sell tax certificates to investors to collect delinquent taxes — correct.",k:true},
+ {t:"Warranty deed",e:"A warranty deed conveys ownership, unrelated to delinquency.",k:false},
+ {t:"Estoppel certificate",e:"That verifies amounts owed (e.g., HOA), not a tax sale.",k:false},
+ {t:"Satisfaction of mortgage",e:"That releases a paid-off mortgage.",k:false}]},
+
+{d:"Taxes Affecting Real Estate",q:"Government-owned property, such as a county courthouse, is:",ch:[
+ {t:"Immune from property taxation",e:"Government property is immune (not taxed and need not apply) — correct.",k:true},
+ {t:"Taxed at full market value",e:"Government property is not taxed.",k:false},
+ {t:"Exempt only if it files an application",e:"That describes 'exempt' (churches/charities); government is 'immune.'",k:false},
+ {t:"Subject only to special assessments",e:"It is broadly immune from ad valorem taxation.",k:false}]},
+
+{d:"Taxes Affecting Real Estate",q:"'Ad valorem' property taxes are based on the property's:",ch:[
+ {t:"Assessed value",e:"Ad valorem means 'according to value' — correct.",k:true},
+ {t:"Owner's income",e:"Property tax is not income-based.",k:false},
+ {t:"Square footage only",e:"Size affects value but is not the tax base by itself.",k:false},
+ {t:"Original purchase price only",e:"Assessed value, not just the old purchase price, sets the base.",k:false}]},
+
+{d:"Taxes Affecting Real Estate",q:"The annual TRIM (Truth in Millage) notice informs a property owner of:",ch:[
+ {t:"The proposed assessed value, exemptions, and estimated taxes",e:"The TRIM notice shows proposed value, exemptions, and proposed taxes — correct.",k:true},
+ {t:"The mortgage payoff amount",e:"That comes from the lender, not a TRIM notice.",k:false},
+ {t:"The chain of title",e:"That is found in a title search, not a TRIM notice.",k:false},
+ {t:"The flood zone designation",e:"Flood zone data is separate from the TRIM notice.",k:false}]},
+
+/* ===== TYPES OF MORTGAGES & SOURCES OF FINANCING (6) ===== */
+{d:"Mortgage Types & Financing",q:"FHA borrowers are required to pay:",ch:[
+ {t:"A mortgage insurance premium (MIP)",e:"FHA loans require MIP, which protects the FHA — correct.",k:true},
+ {t:"Private mortgage insurance (PMI)",e:"PMI applies to conventional loans, not FHA.",k:false},
+ {t:"A VA funding fee",e:"The funding fee is a VA-loan charge.",k:false},
+ {t:"No mortgage insurance",e:"FHA loans do require MIP.",k:false}]},
+
+{d:"Mortgage Types & Financing",q:"VA loans are:",ch:[
+ {t:"Guaranteed by the Department of Veterans Affairs",e:"The VA guarantees the loan to the lender — correct.",k:true},
+ {t:"Insured by the FHA",e:"FHA insurance applies to FHA loans, not VA.",k:false},
+ {t:"Issued directly by the VA",e:"Private lenders make the loan; the VA guarantees it.",k:false},
+ {t:"Funded by the buyer's employer",e:"Employers do not fund VA loans.",k:false}]},
+
+{d:"Mortgage Types & Financing",q:"A 'conforming' conventional loan is one that:",ch:[
+ {t:"Meets Fannie Mae/Freddie Mac standards so it can be sold on the secondary market",e:"Conforming loans fit GSE guidelines and limits — correct.",k:true},
+ {t:"Exceeds all loan limits",e:"That describes a jumbo (non-conforming) loan.",k:false},
+ {t:"Is insured by the government",e:"Conforming conventional loans carry no government insurance.",k:false},
+ {t:"Requires no documentation",e:"Conforming loans must be fully documented to GSE standards.",k:false}]},
+
+{d:"Mortgage Types & Financing",q:"A borrower pays 3 discount points on a $300,000 loan (1 point = 1% of the loan). The cost of the points is:",
+ work:["1 point = 1% of loan = $300,000 × 0.01 = <b>$3,000</b>","3 points × $3,000 = <b>$9,000</b>"],ch:[
+ {t:"$9,000",e:"3 × $3,000 = $9,000 — correct.",k:true},
+ {t:"$3,000",e:"That is only one point.",k:false},
+ {t:"$900",e:"A point is 1% ($3,000), not 0.1%.",k:false},
+ {t:"$30,000",e:"That is 10 points.",k:false}]},
+
+{d:"Mortgage Types & Financing",q:"On an adjustable-rate mortgage, the 'margin' is:",ch:[
+ {t:"The lender's constant add-on to the index",e:"Margin is the fixed amount added to the index to set the rate — correct.",k:true},
+ {t:"The changing economic index itself",e:"The index moves; the margin is the constant add-on.",k:false},
+ {t:"The maximum the rate can ever reach",e:"That is the rate cap, not the margin.",k:false},
+ {t:"The introductory teaser rate",e:"The teaser is a temporary starting rate, not the margin.",k:false}]},
+
+{d:"Mortgage Types & Financing",q:"A savings bank that makes a home loan directly to a buyer is operating in the:",ch:[
+ {t:"Primary mortgage market",e:"Loans originated directly to borrowers are the primary market — correct.",k:true},
+ {t:"Secondary mortgage market",e:"That is where existing loans are bought and sold.",k:false},
+ {t:"Intangible market",e:"No such financing market exists.",k:false},
+ {t:"Escrow market",e:"Escrow is a closing function, not a lending market.",k:false}]},
+
+/* ===== REAL ESTATE CONTRACTS (9) ===== */
+{d:"Real Estate Contracts",q:"A contract signed by a 17-year-old minor is:",ch:[
+ {t:"Voidable by the minor",e:"A minor lacks capacity, so the contract is voidable at the minor's option — correct.",k:true},
+ {t:"Void from the start",e:"It can stand if the minor chooses; it is voidable, not void.",k:false},
+ {t:"Fully binding on the minor",e:"The minor may disaffirm it.",k:false},
+ {t:"A felony",e:"Signing a contract as a minor is not a crime.",k:false}]},
+
+{d:"Real Estate Contracts",q:"Replacing an original contract (or party) with a brand-new one, releasing the original, is:",ch:[
+ {t:"Novation",e:"Novation substitutes a new contract/party with everyone's consent, releasing the old — correct.",k:true},
+ {t:"Assignment",e:"Assignment transfers rights but may leave the original party liable.",k:false},
+ {t:"Rescission",e:"Rescission cancels the contract without a replacement.",k:false},
+ {t:"Acceleration",e:"Acceleration is a mortgage term.",k:false}]},
+
+{d:"Real Estate Contracts",q:"In an option contract, the optionor (seller) is:",ch:[
+ {t:"Bound to hold the offer open, while the optionee is not obligated to buy",e:"Only the seller is bound, making the option unilateral — correct.",k:true},
+ {t:"Free to sell to anyone at any time",e:"During the option the seller must hold it open.",k:false},
+ {t:"Required to buy the property back",e:"No such obligation exists in an option.",k:false},
+ {t:"The party who must purchase",e:"The optionee (buyer) holds the right to buy, not an obligation.",k:false}]},
+
+{d:"Real Estate Contracts",q:"Under which listing does the broker earn a commission regardless of who sells the property — even the owner?",ch:[
+ {t:"Exclusive right of sale",e:"It pays the listing broker no matter who procures the buyer — correct.",k:true},
+ {t:"Exclusive agency",e:"There the owner may sell themselves with no commission.",k:false},
+ {t:"Open listing",e:"That pays only the broker who actually finds the buyer.",k:false},
+ {t:"Net listing",e:"That concerns how commission is figured, not who earns it.",k:false}]},
+
+{d:"Real Estate Contracts",q:"A buyer changes a term and sends the contract back to the seller. Under the mirror-image rule, this is a:",ch:[
+ {t:"Counteroffer that rejects the original offer",e:"Any change makes it a counteroffer and rejects the original — correct.",k:true},
+ {t:"Valid acceptance",e:"Acceptance must match the offer exactly; a change is not acceptance.",k:false},
+ {t:"Binding contract immediately",e:"No contract forms until the counteroffer is accepted.",k:false},
+ {t:"Assignment",e:"That transfers contract rights, unrelated to changing offer terms.",k:false}]},
+
+{d:"Real Estate Contracts",q:"A contract whose purpose is illegal (for example, to commit fraud) is:",ch:[
+ {t:"Void — it lacks a lawful object",e:"A contract for an illegal purpose has no legal effect; it is void — correct.",k:true},
+ {t:"Voidable by either party",e:"It is void from the start, not merely voidable.",k:false},
+ {t:"Valid and enforceable",e:"A lawful object is required for validity.",k:false},
+ {t:"Unenforceable but valid",e:"An illegal object makes it void, not just unenforceable.",k:false}]},
+
+{d:"Real Estate Contracts",q:"At closing, when both buyer and seller have fully performed, the contract is:",ch:[
+ {t:"Executed",e:"Executed means all obligations are complete — correct.",k:true},
+ {t:"Executory",e:"That means something still remains to be performed.",k:false},
+ {t:"Void",e:"A completed valid contract is not void.",k:false},
+ {t:"Unilateral",e:"That describes a one-promise contract, not completion status.",k:false}]},
+
+{d:"Real Estate Contracts",q:"A clause giving a tenant the chance to match any offer before the owner sells the building is a:",ch:[
+ {t:"Right of first refusal",e:"It lets the holder match a future offer before a sale to another — correct.",k:true},
+ {t:"Option contract",e:"An option sets a price to buy; it does not match a third party's offer.",k:false},
+ {t:"Counteroffer",e:"That is a response that changes terms.",k:false},
+ {t:"Contingency",e:"A contingency is a condition to be met, not a matching right.",k:false}]},
+
+{d:"Real Estate Contracts",q:"A contract states that 'time is of the essence.' This means:",ch:[
+ {t:"All stated deadlines must be met exactly",e:"The clause makes dates strict; missing one is a breach — correct.",k:true},
+ {t:"There are no firm deadlines",e:"It does the opposite — it enforces deadlines.",k:false},
+ {t:"Closing can occur whenever convenient",e:"It requires timely performance.",k:false},
+ {t:"The contract is an option",e:"It has nothing to do with options.",k:false}]},
+
+/* ===== REAL ESTATE BROKERAGE ACTIVITIES & PROCEDURES (6) ===== */
+{d:"Brokerage Activities",q:"A broker may keep up to how much of their OWN funds in a PROPERTY MANAGEMENT escrow account?",ch:[
+ {t:"$5,000",e:"Up to $5,000 of broker funds may be kept in a property management escrow account — correct.",k:true},
+ {t:"$1,000",e:"$1,000 is the limit for a SALES escrow account.",k:false},
+ {t:"$0",e:"A cushion is permitted.",k:false},
+ {t:"$10,000",e:"Exceeds the allowed limit.",k:false}]},
+
+{d:"Brokerage Activities",q:"Brokerage transaction records must generally be retained for at least:",ch:[
+ {t:"5 years",e:"Brokers must keep transaction records for at least 5 years — correct.",k:true},
+ {t:"6 months",e:"Far too short.",k:false},
+ {t:"1 year",e:"Too short — the requirement is 5 years.",k:false},
+ {t:"20 years",e:"Longer than required.",k:false}]},
+
+{d:"Brokerage Activities",q:"When a broker cannot resolve conflicting escrow demands, the broker may request an escrow disbursement order (EDO) from:",ch:[
+ {t:"FREC",e:"FREC issues an EDO directing how to disburse disputed funds — correct.",k:true},
+ {t:"The buyer's lender",e:"Lenders do not issue EDOs.",k:false},
+ {t:"The county clerk",e:"The clerk does not issue EDOs.",k:false},
+ {t:"The title company",e:"The EDO comes from FREC, not the title company.",k:false}]},
+
+{d:"Brokerage Activities",q:"An advertisement that fails to include the brokerage's name is a:",ch:[
+ {t:"Prohibited 'blind' advertisement",e:"All ads must include the brokerage name; omitting it is an illegal blind ad — correct.",k:true},
+ {t:"Required disclosure",e:"It is prohibited, not required.",k:false},
+ {t:"Standard practice",e:"It violates advertising rules.",k:false},
+ {t:"Permitted if the price is shown",e:"The brokerage name is required regardless of the price.",k:false}]},
+
+{d:"Brokerage Activities",q:"Two competing brokerages agree to charge the same commission rate. This is:",ch:[
+ {t:"Illegal price-fixing under antitrust law",e:"Agreeing with competitors to set prices is illegal price-fixing — correct.",k:true},
+ {t:"Allowed if both agree",e:"Mutual agreement is exactly what makes it illegal.",k:false},
+ {t:"Required by FREC",e:"FREC does not set commission rates.",k:false},
+ {t:"A normal industry standard",e:"Commissions are always negotiable; fixing them is illegal.",k:false}]},
+
+{d:"Brokerage Activities",q:"A broker is generally considered to have EARNED the commission when the broker:",ch:[
+ {t:"Produces a ready, willing, and able buyer on the seller's terms",e:"The commission is earned when such a buyer is produced — correct.",k:true},
+ {t:"Places a sign in the yard",e:"Marketing steps alone do not earn the commission.",k:false},
+ {t:"Lists the property",e:"Merely listing does not earn the commission.",k:false},
+ {t:"Holds one open house",e:"An open house alone does not earn the commission.",k:false}]},
+
+/* ===== RESIDENTIAL MORTGAGES (6) ===== */
+{d:"Residential Mortgages",q:"The mortgage clause requiring the lender to release the lien once the loan is fully paid is the:",ch:[
+ {t:"Defeasance clause",e:"Defeasance requires the lender to release the mortgage upon full payment — correct.",k:true},
+ {t:"Acceleration clause",e:"That makes the balance due upon default.",k:false},
+ {t:"Due-on-sale clause",e:"That triggers payoff upon transfer.",k:false},
+ {t:"Escalation clause",e:"That raises a rate or rent.",k:false}]},
+
+{d:"Residential Mortgages",q:"A clause that lets the lender demand the full balance if the property is sold is the:",ch:[
+ {t:"Due-on-sale (alienation) clause",e:"It lets the lender call the loan due upon transfer — correct.",k:true},
+ {t:"Defeasance clause",e:"That releases the lien when the loan is paid.",k:false},
+ {t:"Subordination clause",e:"That changes lien priority.",k:false},
+ {t:"Prepayment clause",e:"That addresses paying early, not a sale.",k:false}]},
+
+{d:"Residential Mortgages",q:"On a conventional loan, private mortgage insurance (PMI) is generally required when the down payment is less than:",ch:[
+ {t:"20%",e:"PMI is typically required below 20% down — correct.",k:true},
+ {t:"3.5%",e:"3.5% is the FHA minimum (with MIP, not PMI).",k:false},
+ {t:"50%",e:"Not the standard PMI threshold.",k:false},
+ {t:"10%",e:"PMI tracks the 20% equity line, not 10%.",k:false}]},
+
+{d:"Residential Mortgages",q:"When a buyer ASSUMES the seller's loan WITH novation, the:",ch:[
+ {t:"Original borrower is released from liability",e:"Novation substitutes the buyer and releases the original borrower — correct.",k:true},
+ {t:"Original borrower remains fully liable",e:"That is taking title 'subject to,' not assumption with novation.",k:false},
+ {t:"Lender must forgive the loan",e:"The debt continues; only the obligor changes.",k:false},
+ {t:"Interest rate drops to zero",e:"Loan terms do not become interest-free.",k:false}]},
+
+{d:"Residential Mortgages",q:"When a mortgage loan is paid in full, the document recorded to clear the lien is the:",ch:[
+ {t:"Satisfaction of mortgage",e:"A satisfaction (release) is recorded when the debt is fully paid — correct.",k:true},
+ {t:"Promissory note",e:"The note is the promise to pay, not the release.",k:false},
+ {t:"Estoppel letter",e:"That states the balance owed, not a release.",k:false},
+ {t:"Acceleration notice",e:"That demands payment on default.",k:false}]},
+
+{d:"Residential Mortgages",q:"Pledging property as security for a loan while keeping possession of it is called:",ch:[
+ {t:"Hypothecation",e:"Hypothecation pledges property as collateral without giving up possession — correct.",k:true},
+ {t:"Subordination",e:"Subordination changes a lien's priority.",k:false},
+ {t:"Novation",e:"Novation substitutes a party or contract.",k:false},
+ {t:"Alienation",e:"Alienation is the transfer of title.",k:false}]},
+
+/* ===== TITLES, DEEDS & OWNERSHIP RESTRICTIONS (3) ===== */
+{d:"Titles & Deeds",q:"Recording a deed in the public records provides:",ch:[
+ {t:"Constructive notice to the world of the ownership interest",e:"Recording gives legal (constructive) notice to everyone — correct.",k:true},
+ {t:"A guarantee that the title is perfect",e:"Recording gives notice but does not guarantee title; that is title insurance.",k:false},
+ {t:"Ownership even without a valid deed",e:"Recording an invalid deed does not create ownership.",k:false},
+ {t:"No legal effect at all",e:"Recording has the important effect of constructive notice.",k:false}]},
+
+{d:"Titles & Deeds",q:"Acquiring title by openly, continuously, and without permission using another's land for the statutory period is:",ch:[
+ {t:"Adverse possession",e:"Open, notorious, continuous, hostile use for the statutory period can transfer title — correct.",k:true},
+ {t:"An easement by necessity",e:"That grants use (such as access), not ownership.",k:false},
+ {t:"Escheat",e:"Escheat passes property to the state when there are no heirs.",k:false},
+ {t:"A quitclaim",e:"A quitclaim is a voluntary conveyance document.",k:false}]},
+
+{d:"Titles & Deeds",q:"Which is NOT required for a valid deed?",ch:[
+ {t:"The grantee's signature",e:"The grantee need not sign; only the grantor must — correct answer.",k:true},
+ {t:"The grantor's signature",e:"The grantor must sign the deed.",k:false},
+ {t:"A legal description of the property",e:"A proper legal description is required.",k:false},
+ {t:"Delivery and acceptance",e:"The deed must be delivered and accepted to convey title.",k:false}]},
+
+/* ===== THE REAL ESTATE BUSINESS (1) ===== */
+{d:"The Real Estate Business",q:"Compared with assets like stocks, real estate is generally considered:",ch:[
+ {t:"Relatively illiquid (slow to convert to cash)",e:"Real estate typically takes time to sell, making it illiquid — correct.",k:true},
+ {t:"Highly liquid",e:"Real estate is the opposite of highly liquid.",k:false},
+ {t:"Identical to stocks",e:"Real estate is unique and illiquid, unlike fungible stocks.",k:false},
+ {t:"Completely risk-free",e:"No investment, including real estate, is risk-free.",k:false}]},
+
+/* ===== PLANNING & ZONING (1) ===== */
+{d:"Planning & Zoning",q:"A local government's authority to enact zoning to protect public health, safety, and welfare comes from its:",ch:[
+ {t:"Police power",e:"Zoning is an exercise of police power, requiring no compensation — correct.",k:true},
+ {t:"Power of eminent domain",e:"Eminent domain TAKES property with compensation; zoning only regulates use.",k:false},
+ {t:"Power of escheat",e:"Escheat returns property to the state when there are no heirs.",k:false},
+ {t:"Taxing power",e:"Taxation funds government; it does not authorize zoning.",k:false}]}
+
+];
+
+/* ===================== QUIZ ENGINE ===================== */
+const LETTERS=["A","B","C","D"];
+const PASS=75;
+let order=[], cur=0, score=0, answered=0;
+let results=[];
+
+function shuffle(a){
+  const arr=a.slice();
+  for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
+  return arr;
+}
+function buildOrder(){
+  order = shuffle(BANK.map((q,i)=>i)).map(i=>{
+    const q=BANK[i];
+    return {d:q.d, q:q.q, work:q.work||null, ch:shuffle(q.ch)};
+  });
+}
+
+function render(){
+  const total=order.length;
+  const item=order[cur];
+  document.getElementById("counter").textContent=`Question ${cur+1} of ${total}`;
+  document.getElementById("liveScore").textContent=`Score: ${score}/${answered}`;
+  document.getElementById("progressBar").style.width=((cur)/total*100)+"%";
+
+  const choicesHtml=item.ch.map((c,idx)=>`
+    <li class="choice" data-idx="${idx}" data-correct="${c.k}">
+      <span class="letter">${LETTERS[idx]}</span>
+      <span class="ctext">${c.t}</span>
+      <span class="expl ${c.k?'good':'bad'}" id="expl-${idx}"></span>
+    </li>`).join("");
+
+  const workHtml = item.work ? `<div class="work"><div class="wt">📐 Worked solution</div><ol>${
+      item.work.map(s=>`<li>${s}</li>`).join("")}</ol></div>` : "";
+
+  document.getElementById("quiz").innerHTML=`
+    <span class="domain">${item.d}</span>
+    <p class="qtext">${item.q}</p>
+    <ul class="choices" id="choices">${choicesHtml}</ul>
+    <div class="verdict" id="verdict"></div>
+    ${workHtml}
+    <div class="nav">
+      <button class="btn next" id="nextBtn">${cur+1<total?'Next Question →':'See My Results →'}</button>
+    </div>`;
+
+  item.ch.forEach((c,idx)=>{ document.getElementById("expl-"+idx).textContent=c.e; });
+
+  document.querySelectorAll("#choices .choice").forEach(el=>{
+    el.addEventListener("click",()=>onAnswer(el));
+  });
+  document.getElementById("nextBtn").addEventListener("click",next);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function onAnswer(el){
+  const choices=document.getElementById("choices");
+  if(choices.classList.contains("answered")) return;
+  choices.classList.add("answered");
+  const picked = el.dataset.correct==="true";
+  answered++;
+  if(picked) score++;
+  results.push({domain:order[cur].d, correct:picked});
+
+  document.querySelectorAll("#choices .choice").forEach(c=>{
+    if(c.dataset.correct==="true") c.classList.add("correct");
+    else c.classList.add("dim");
+  });
+  if(!picked){ el.classList.remove("dim"); el.classList.add("wrong"); }
+
+  const v=document.getElementById("verdict");
+  v.textContent = picked ? "✓ Correct" : "✗ Incorrect";
+  v.classList.add(picked?"good":"bad");
+  document.getElementById("liveScore").textContent=`Score: ${score}/${answered}`;
+}
+
+function next(){
+  if(cur+1<order.length){ cur++; render(); }
+  else showResults();
+}
+
+function showResults(){
+  document.getElementById("quiz").style.display="none";
+  document.getElementById("progressBar").style.width="100%";
+  document.getElementById("counter").textContent="Complete";
+  const pct=Math.round(score/order.length*100);
+  const pass=pct>=PASS;
+
+  const dom={};
+  results.forEach(r=>{
+    dom[r.domain]=dom[r.domain]||{c:0,t:0};
+    dom[r.domain].t++; if(r.correct) dom[r.domain].c++;
+  });
+  const rows=Object.keys(dom).sort((a,b)=> (dom[a].c/dom[a].t) - (dom[b].c/dom[b].t)).map(k=>{
+    const p=Math.round(dom[k].c/dom[k].t*100);
+    const cls=p<60?"lo":(p<75?"mid":"hi");
+    const barcol=p<60?"#ea4335":(p<75?"#f4a000":"#34a853");
+    return `<tr>
+      <td>${k}<div class="barwrap"><div style="width:${p}%;background:${barcol}"></div></div></td>
+      <td class="pct ${cls}">${dom[k].c}/${dom[k].t}<br>${p}%</td>
+    </tr>`;
+  }).join("");
+
+  const r=document.getElementById("results");
+  r.style.display="block";
+  r.innerHTML=`
+    <div class="result-card ${pass?'pass':'fail'}">
+      <div class="result-badge">${pass?'On Track':'Keep Drilling'}</div>
+      <div class="result-score">${pct}%</div>
+      <div>${score} of ${order.length} correct on your weak areas</div>
+      <div class="result-sub">${pass
+        ? "At or above 75% on the toughest topics — exactly where you need to be. Run it again to lock it in."
+        : `The real exam needs 75%. On these weak areas you're at ${pct}% — keep drilling the red rows below until they turn green.`}</div>
+    </div>
+    <h3 class="bd">Your score by topic (weakest first)</h3>
+    <table class="dom">${rows}</table>
+    <div class="nav" style="margin-top:22px;">
+      <button class="btn secondary" onclick="location.reload()">↻ Retake (reshuffles)</button>
+    </div>
+    <p class="footnote">Weak-areas drill, Set B (50 Q). Math questions show a step-by-step worked solution.
+    Questions reshuffle each attempt.
+    <br><a href="index.html" style="color:#088395;font-weight:700;">Drill A</a> &nbsp;·&nbsp;
+    <a href="full.html" style="color:#088395;font-weight:700;">Full 100-Q mock exam</a><br>
+    Study tool only — not affiliated with DBPR or Pearson VUE; verify current statutes and figures before relying on them.</p>`;
+  document.getElementById("liveScore").textContent=`Score: ${score}/${order.length}`;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+buildOrder();
+render();
+</script>
+</body>
+</html>
