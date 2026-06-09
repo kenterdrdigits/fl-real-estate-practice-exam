@@ -125,330 +125,332 @@
 const BANK = [
 
 /* ===== COMPUTATIONS & CLOSING (12) ===== */
-{d:"Computations & Closing",q:"A property sells for $356,250. Deed doc stamps are $0.70 per $100, and any fraction of $100 rounds UP. The deed doc-stamp tax is:",
- work:["Round price UP to the next $100: $356,250 → <b>$356,300</b>","$356,300 ÷ $100 = <b>3,563</b> units","3,563 × $0.70 = <b>$2,494.10</b>"],ch:[
- {t:"$2,494.10",e:"After rounding up to $356,300, 3,563 × $0.70 = $2,494.10 — correct.",k:true},
- {t:"$2,493.75",e:"This skipped rounding the fraction up to the next $100.",k:false},
- {t:"$1,247.05",e:"That uses the $0.35 note rate instead of the $0.70 deed rate.",k:false},
- {t:"$3,563.00",e:"That is the unit count, not the tax.",k:false}]},
+{d:"Computations & Closing",q:"A property sells for $268,340. Deed doc stamps are $0.70 per $100, and any fraction of $100 rounds UP. The deed doc-stamp tax is:",
+ work:["Round price UP to the next $100: $268,340 → <b>$268,400</b>","$268,400 ÷ $100 = <b>2,684</b> units","2,684 × $0.70 = <b>$1,878.80</b>"],ch:[
+ {t:"$1,878.80",e:"After rounding up to $268,400, 2,684 × $0.70 = $1,878.80 — correct.",k:true},
+ {t:"$1,878.38",e:"This skipped rounding the fraction up to the next $100.",k:false},
+ {t:"$939.40",e:"That uses the $0.35 note rate, not the $0.70 deed rate.",k:false},
+ {t:"$2,684.00",e:"That is just the unit count, not the tax.",k:false}]},
 
-{d:"Computations & Closing",q:"A buyer signs a new $228,000 promissory note. Note doc stamps are $0.35 per $100. The note doc-stamp tax is:",
- work:["$228,000 ÷ $100 = <b>2,280</b> units","2,280 × $0.35 = <b>$798.00</b>"],ch:[
- {t:"$798.00",e:"2,280 × $0.35 = $798 — correct.",k:true},
- {t:"$1,596.00",e:"That uses the $0.70 DEED rate, not the note rate.",k:false},
- {t:"$456.00",e:"That is the intangible tax ($0.002), a separate charge.",k:false},
- {t:"$79.80",e:"Decimal slip — the rate is $0.35, not $0.035, per $100.",k:false}]},
+{d:"Computations & Closing",q:"A buyer signs a new $415,000 mortgage/note. Find the TOTAL of the note doc stamps ($0.35/$100) plus the intangible tax ($0.002).",
+ work:["Note stamps: $415,000 ÷ 100 = 4,150 × $0.35 = <b>$1,452.50</b>","Intangible: $415,000 × 0.002 = <b>$830.00</b>","Total = $1,452.50 + $830.00 = <b>$2,282.50</b>"],ch:[
+ {t:"$2,282.50",e:"$1,452.50 note stamps + $830 intangible = $2,282.50 — correct.",k:true},
+ {t:"$1,452.50",e:"That is only the note doc stamps; add the intangible tax.",k:false},
+ {t:"$830.00",e:"That is only the intangible tax; add the note doc stamps.",k:false},
+ {t:"$3,735.00",e:"That wrongly uses the $0.70 deed rate on the note.",k:false}]},
 
-{d:"Computations & Closing",q:"A home sells for $450,000 with a new $360,000 mortgage. Find the COMBINED deed stamps ($0.70/$100) + note stamps ($0.35/$100) + intangible tax ($0.002).",
- work:["Deed: 4,500 × $0.70 = <b>$3,150</b>","Note: 3,600 × $0.35 = <b>$1,260</b>","Intangible: $360,000 × 0.002 = <b>$720</b>","Total = $3,150 + $1,260 + $720 = <b>$5,130</b>"],ch:[
- {t:"$5,130",e:"$3,150 + $1,260 + $720 = $5,130 — correct.",k:true},
- {t:"$4,410",e:"That omits the $720 intangible tax.",k:false},
- {t:"$3,150",e:"That is only the deed stamps.",k:false},
- {t:"$5,850",e:"That applies the $0.70 deed rate to the loan amounts too.",k:false}]},
+{d:"Computations & Closing",q:"A new mortgage is $510,000. The Florida intangible tax is 2 mills ($0.002 per $1). The intangible tax is:",
+ work:["Rate = 2 mills = <b>$0.002</b> per $1","$510,000 × 0.002 = <b>$1,020.00</b>"],ch:[
+ {t:"$1,020.00",e:"$510,000 × 0.002 = $1,020 — correct.",k:true},
+ {t:"$1,785.00",e:"That uses the $0.35/$100 note rate, not the intangible rate.",k:false},
+ {t:"$510.00",e:"That is only 1 mill; the rate is 2 mills.",k:false},
+ {t:"$10,200.00",e:"Decimal slip — 2 mills is $0.002, not $0.02.",k:false}]},
 
-{d:"Computations & Closing",q:"A seller PREPAID the full $3,650 annual tax (365-day method). At closing the buyer will own the property for 200 days of the year. The proration is:",
- work:["Daily rate = $3,650 ÷ 365 = <b>$10.00/day</b>","Buyer's 200 days: 200 × $10 = <b>$2,000</b>","Seller already paid → buyer reimburses → <b>CREDIT seller, DEBIT buyer</b>"],ch:[
- {t:"$2,000 credit to the seller",e:"Seller prepaid, so the buyer reimburses the seller's 200-day share — credit seller / debit buyer, correct.",k:true},
- {t:"$2,000 debit to the seller",e:"Direction is reversed — a prepaid item is a credit to the seller.",k:false},
- {t:"$1,650 credit to the seller",e:"That uses 165 days; the buyer owns 200 days.",k:false},
- {t:"$10 credit to the seller",e:"$10 is only the daily rate, not the 200-day total.",k:false}]},
+{d:"Computations & Closing",q:"A seller PREPAID the full $2,920 annual tax (365-day method). At closing the buyer will own the property 250 days of the year. The proration is:",
+ work:["Daily rate = $2,920 ÷ 365 = <b>$8.00/day</b>","Buyer's 250 days: 250 × $8 = <b>$2,000</b>","Seller prepaid → buyer reimburses → <b>CREDIT seller, DEBIT buyer</b>"],ch:[
+ {t:"$2,000 credit to the seller",e:"Seller prepaid, so the buyer reimburses the seller's 250-day share — credit seller / debit buyer, correct.",k:true},
+ {t:"$2,000 debit to the seller",e:"Reversed — a prepaid item is a credit to the seller.",k:false},
+ {t:"$920 credit to the seller",e:"That uses 115 days; the buyer owns 250 days.",k:false},
+ {t:"$8 credit to the seller",e:"$8 is only the daily rate, not the 250-day total.",k:false}]},
 
-{d:"Computations & Closing",q:"A listing broker earned a total commission of $19,500 at a 6% rate. The property's sale price was:",
- work:["Sale price = commission ÷ rate","$19,500 ÷ 0.06 = <b>$325,000</b>"],ch:[
- {t:"$325,000",e:"$19,500 ÷ 0.06 = $325,000 — correct.",k:true},
- {t:"$1,170",e:"That multiplies by 6% again instead of dividing.",k:false},
- {t:"$32,500",e:"Off by a factor of 10.",k:false},
- {t:"$292,500",e:"That subtracts the commission instead of solving for price.",k:false}]},
+{d:"Computations & Closing",q:"A total commission of $26,400 was charged at a 6% rate. The property's sale price was:",
+ work:["Sale price = commission ÷ rate","$26,400 ÷ 0.06 = <b>$440,000</b>"],ch:[
+ {t:"$440,000",e:"$26,400 ÷ 0.06 = $440,000 — correct.",k:true},
+ {t:"$1,584",e:"That multiplies by 6% again instead of dividing.",k:false},
+ {t:"$44,000",e:"Off by a factor of 10.",k:false},
+ {t:"$158,400",e:"That subtracts the commission instead of solving for price.",k:false}]},
 
-{d:"Computations & Closing",q:"A home sells for $500,000 at a 5% total commission, split 50/50 between the two brokers. The listing broker pays its associate 55% of its half. The associate receives:",
- work:["Total commission: $500,000 × 0.05 = <b>$25,000</b>","Listing side's half: $25,000 ÷ 2 = <b>$12,500</b>","Associate's 55%: $12,500 × 0.55 = <b>$6,875</b>"],ch:[
- {t:"$6,875",e:"55% of the $12,500 half = $6,875 — correct.",k:true},
- {t:"$12,500",e:"That is the full half, before the associate's 55% split.",k:false},
- {t:"$5,625",e:"That is the broker's retained 45%, not the associate's share.",k:false},
- {t:"$13,750",e:"That takes 55% of the entire commission, not one half.",k:false}]},
+{d:"Computations & Closing",q:"Sale price $750,000, commission 4%, split 50/50. The listing broker pays its associate 60% of its half. The associate receives:",
+ work:["Total commission: $750,000 × 0.04 = <b>$30,000</b>","Listing side's half: $30,000 ÷ 2 = <b>$15,000</b>","Associate's 60%: $15,000 × 0.60 = <b>$9,000</b>"],ch:[
+ {t:"$9,000",e:"60% of the $15,000 half = $9,000 — correct.",k:true},
+ {t:"$15,000",e:"That is the full half, before the associate's 60% split.",k:false},
+ {t:"$6,000",e:"That is the broker's retained 40%, not the associate's share.",k:false},
+ {t:"$18,000",e:"That takes 60% of the entire commission, not one half.",k:false}]},
 
-{d:"Computations & Closing",q:"A seller sells for $318,000 and pays a 6% commission (no other costs). The seller's NET proceeds are:",
- work:["Commission = $318,000 × 0.06 = <b>$19,080</b>","Net = $318,000 − $19,080 = <b>$298,920</b>"],ch:[
- {t:"$298,920",e:"$318,000 − $19,080 commission = $298,920 — correct.",k:true},
- {t:"$19,080",e:"That is the commission, not the net.",k:false},
- {t:"$336,080",e:"That ADDS the commission instead of subtracting it.",k:false},
- {t:"$299,880",e:"That uses a 5.7% commission, not 6%.",k:false}]},
+{d:"Computations & Closing",q:"A $480,000 loan carries 6% annual interest. Using a 360-day year, the borrower owes prepaid interest for 15 days at closing. The amount is:",
+ work:["Annual interest = $480,000 × 0.06 = <b>$28,800</b>","Daily (360-day) = $28,800 ÷ 360 = <b>$80/day</b>","15 days × $80 = <b>$1,200</b>"],ch:[
+ {t:"$1,200",e:"$80/day × 15 days = $1,200 — correct.",k:true},
+ {t:"$80",e:"That is only one day of interest.",k:false},
+ {t:"$2,400",e:"That uses 30 days; the problem says 15.",k:false},
+ {t:"$4,800",e:"Not a valid result for 15 days.",k:false}]},
 
-{d:"Computations & Closing",q:"A buyer gets a $238,000 loan on a home that costs $280,000. The loan-to-value (LTV) ratio is:",
- work:["LTV = loan ÷ value","$238,000 ÷ $280,000 = 0.85 = <b>85%</b>"],ch:[
- {t:"85%",e:"$238,000 ÷ $280,000 = 85% — correct.",k:true},
- {t:"15%",e:"15% is the down-payment percentage, not the LTV.",k:false},
- {t:"117.6%",e:"That divides value by loan instead of loan by value.",k:false},
- {t:"80%",e:"Close, but the exact ratio here is 85%.",k:false}]},
+{d:"Computations & Closing",q:"A buyer purchases a $540,000 home with an 80% loan-to-value loan. The down payment is:",
+ work:["Loan = $540,000 × 0.80 = <b>$432,000</b>","Down payment = $540,000 − $432,000 = <b>$108,000</b>"],ch:[
+ {t:"$108,000",e:"$540,000 − $432,000 loan = $108,000 down — correct.",k:true},
+ {t:"$432,000",e:"That is the loan amount, not the down payment.",k:false},
+ {t:"$54,000",e:"That is only 10% of the price.",k:false},
+ {t:"$135,000",e:"That uses a 75% LTV, not 80%.",k:false}]},
 
-{d:"Computations & Closing",q:"A loan balance is $200,000 at a 6% annual interest rate. The interest portion of the FIRST monthly payment is:",
- work:["Annual interest = $200,000 × 0.06 = <b>$12,000</b>","Monthly interest = $12,000 ÷ 12 = <b>$1,000</b>"],ch:[
- {t:"$1,000",e:"$12,000 annual ÷ 12 = $1,000 for the first month — correct.",k:true},
- {t:"$12,000",e:"That is a full year's interest, not one month.",k:false},
- {t:"$100",e:"Off by a factor of 10.",k:false},
- {t:"$1,200",e:"That uses a 7.2% rate, not 6%.",k:false}]},
+{d:"Computations & Closing",q:"A home listed at $480,000 sells for $456,000. It sold for what percent of the list price?",
+ work:["% of list = sale price ÷ list price","$456,000 ÷ $480,000 = 0.95 = <b>95%</b>"],ch:[
+ {t:"95%",e:"$456,000 ÷ $480,000 = 95% — correct.",k:true},
+ {t:"105%",e:"That divides list by sale; it sold BELOW list.",k:false},
+ {t:"5%",e:"5% is the discount off list, not the percent of list.",k:false},
+ {t:"24%",e:"Not a valid result for this ratio.",k:false}]},
 
-{d:"Computations & Closing",q:"A rectangular lot measures 200 ft by 435.6 ft. Its size in acres is: (1 acre = 43,560 sq ft)",
- work:["Area = 200 × 435.6 = <b>87,120 sq ft</b>","Acres = 87,120 ÷ 43,560 = <b>2 acres</b>"],ch:[
- {t:"2 acres",e:"87,120 sq ft ÷ 43,560 = 2 acres — correct.",k:true},
- {t:"1 acre",e:"That would be only 43,560 sq ft.",k:false},
- {t:"4 acres",e:"That doubles the actual area.",k:false},
- {t:"0.5 acre",e:"Far too small for 87,120 sq ft.",k:false}]},
+{d:"Computations & Closing",q:"A rectangular lot is 150 feet by 200 feet. Its area in square feet is:",
+ work:["Area = 150 × 200","= <b>30,000 sq ft</b>"],ch:[
+ {t:"30,000 sq ft",e:"150 × 200 = 30,000 sq ft — correct.",k:true},
+ {t:"350 sq ft",e:"That adds the sides instead of multiplying.",k:false},
+ {t:"3,000 sq ft",e:"Decimal slip — recheck 150 × 200.",k:false},
+ {t:"60,000 sq ft",e:"That doubles the correct area.",k:false}]},
 
-{d:"Computations & Closing",q:"A tenant pays $1,800 monthly rent on the 1st. The property closes on the 10th of a 30-day month; the buyer owns the last 20 days. The rent proration is:",
- work:["Daily rent = $1,800 ÷ 30 = <b>$60/day</b>","Buyer's 20 days: 20 × $60 = <b>$1,200</b>","Seller already collected the rent → <b>CREDIT buyer, DEBIT seller</b>"],ch:[
- {t:"$1,200 credit to the buyer",e:"Seller collected the rent, so the buyer is credited their 20-day share — correct.",k:true},
- {t:"$1,200 credit to the seller",e:"Reversed — the seller already has the cash, so it credits the buyer.",k:false},
- {t:"$600 credit to the buyer",e:"That uses 10 days; the buyer owns 20 days.",k:false},
- {t:"$1,800 credit to the buyer",e:"That gives the buyer the whole month instead of 20 days.",k:false}]},
+{d:"Computations & Closing",q:"A buyer purchases at $450,000 with a 75% loan, pays $6,000 in closing costs, and already put down $10,000 earnest money. The cash still needed at closing is:",
+ work:["Down payment = $450,000 × 25% = <b>$112,500</b>","Add closing costs: $112,500 + $6,000 = <b>$118,500</b>","Subtract earnest money paid: $118,500 − $10,000 = <b>$108,500</b>"],ch:[
+ {t:"$108,500",e:"$112,500 down + $6,000 costs − $10,000 earnest = $108,500 — correct.",k:true},
+ {t:"$118,500",e:"That forgets to credit the $10,000 earnest money already paid.",k:false},
+ {t:"$112,500",e:"That is only the down payment, ignoring costs and the deposit.",k:false},
+ {t:"$128,500",e:"That adds the earnest money instead of subtracting it.",k:false}]},
 
-{d:"Computations & Closing",q:"A buyer purchases at $300,000 with an 80% loan, pays $4,000 in closing costs, and already put down $5,000 earnest money. The cash still needed at closing is:",
- work:["Down payment = $300,000 × 20% = <b>$60,000</b>","Add closing costs: $60,000 + $4,000 = <b>$64,000</b>","Subtract earnest money already paid: $64,000 − $5,000 = <b>$59,000</b>"],ch:[
- {t:"$59,000",e:"$60,000 down + $4,000 costs − $5,000 earnest = $59,000 — correct.",k:true},
- {t:"$64,000",e:"That forgets to credit the $5,000 earnest money already paid.",k:false},
- {t:"$60,000",e:"That is only the down payment, ignoring costs and the deposit.",k:false},
- {t:"$69,000",e:"That adds the earnest money instead of subtracting it.",k:false}]},
-
-/* ===== TAXES AFFECTING REAL ESTATE (6) ===== */
-{d:"Taxes Affecting Real Estate",q:"A home is assessed at $290,000 with $55,000 in total exemptions, taxed at 20 mills. The annual tax is:",
- work:["Taxable value = $290,000 − $55,000 = <b>$235,000</b>","20 mills = <b>$0.020</b> per $1","$235,000 × 0.020 = <b>$4,700</b>"],ch:[
- {t:"$4,700",e:"$235,000 taxable × 0.020 = $4,700 — correct.",k:true},
- {t:"$4,800",e:"That subtracts only a $50,000 exemption, not the full $55,000.",k:false},
- {t:"$5,800",e:"That forgets the exemptions entirely.",k:false},
- {t:"$470",e:"That uses 2 mills instead of 20.",k:false}]},
-
-{d:"Taxes Affecting Real Estate",q:"A millage rate of 15 mills equals what percentage of taxable value?",
- work:["1 mill = $0.001 = <b>0.1%</b>","15 mills = 15 × 0.1% = <b>1.5%</b>"],ch:[
- {t:"1.5%",e:"15 mills = 1.5% of taxable value — correct.",k:true},
- {t:"15%",e:"That treats a mill as 1%, but a mill is 0.1%.",k:false},
- {t:"0.15%",e:"Off by a factor of 10.",k:false},
- {t:"150%",e:"Far too large.",k:false}]},
-
-{d:"Taxes Affecting Real Estate",q:"When Florida property taxes go unpaid, the county collects by selling a:",ch:[
- {t:"Tax certificate",e:"Counties sell tax certificates to investors to collect delinquent taxes — correct.",k:true},
- {t:"Warranty deed",e:"A warranty deed conveys ownership, unrelated to delinquency.",k:false},
- {t:"Estoppel certificate",e:"That verifies amounts owed (e.g., HOA), not a tax sale.",k:false},
- {t:"Satisfaction of mortgage",e:"That releases a paid-off mortgage.",k:false}]},
-
-{d:"Taxes Affecting Real Estate",q:"Government-owned property, such as a county courthouse, is:",ch:[
- {t:"Immune from property taxation",e:"Government property is immune (not taxed and need not apply) — correct.",k:true},
- {t:"Taxed at full market value",e:"Government property is not taxed.",k:false},
- {t:"Exempt only if it files an application",e:"That describes 'exempt' (churches/charities); government is 'immune.'",k:false},
- {t:"Subject only to special assessments",e:"It is broadly immune from ad valorem taxation.",k:false}]},
-
-{d:"Taxes Affecting Real Estate",q:"'Ad valorem' property taxes are based on the property's:",ch:[
- {t:"Assessed value",e:"Ad valorem means 'according to value' — correct.",k:true},
- {t:"Owner's income",e:"Property tax is not income-based.",k:false},
- {t:"Square footage only",e:"Size affects value but is not the tax base by itself.",k:false},
- {t:"Original purchase price only",e:"Assessed value, not just the old purchase price, sets the base.",k:false}]},
-
-{d:"Taxes Affecting Real Estate",q:"The annual TRIM (Truth in Millage) notice informs a property owner of:",ch:[
- {t:"The proposed assessed value, exemptions, and estimated taxes",e:"The TRIM notice shows proposed value, exemptions, and proposed taxes — correct.",k:true},
- {t:"The mortgage payoff amount",e:"That comes from the lender, not a TRIM notice.",k:false},
- {t:"The chain of title",e:"That is found in a title search, not a TRIM notice.",k:false},
- {t:"The flood zone designation",e:"Flood zone data is separate from the TRIM notice.",k:false}]},
-
-/* ===== TYPES OF MORTGAGES & SOURCES OF FINANCING (6) ===== */
-{d:"Mortgage Types & Financing",q:"FHA borrowers are required to pay:",ch:[
- {t:"A mortgage insurance premium (MIP)",e:"FHA loans require MIP, which protects the FHA — correct.",k:true},
- {t:"Private mortgage insurance (PMI)",e:"PMI applies to conventional loans, not FHA.",k:false},
- {t:"A VA funding fee",e:"The funding fee is a VA-loan charge.",k:false},
- {t:"No mortgage insurance",e:"FHA loans do require MIP.",k:false}]},
-
-{d:"Mortgage Types & Financing",q:"VA loans are:",ch:[
- {t:"Guaranteed by the Department of Veterans Affairs",e:"The VA guarantees the loan to the lender — correct.",k:true},
- {t:"Insured by the FHA",e:"FHA insurance applies to FHA loans, not VA.",k:false},
- {t:"Issued directly by the VA",e:"Private lenders make the loan; the VA guarantees it.",k:false},
- {t:"Funded by the buyer's employer",e:"Employers do not fund VA loans.",k:false}]},
-
-{d:"Mortgage Types & Financing",q:"A 'conforming' conventional loan is one that:",ch:[
- {t:"Meets Fannie Mae/Freddie Mac standards so it can be sold on the secondary market",e:"Conforming loans fit GSE guidelines and limits — correct.",k:true},
- {t:"Exceeds all loan limits",e:"That describes a jumbo (non-conforming) loan.",k:false},
- {t:"Is insured by the government",e:"Conforming conventional loans carry no government insurance.",k:false},
- {t:"Requires no documentation",e:"Conforming loans must be fully documented to GSE standards.",k:false}]},
-
-{d:"Mortgage Types & Financing",q:"A borrower pays 3 discount points on a $300,000 loan (1 point = 1% of the loan). The cost of the points is:",
- work:["1 point = 1% of loan = $300,000 × 0.01 = <b>$3,000</b>","3 points × $3,000 = <b>$9,000</b>"],ch:[
- {t:"$9,000",e:"3 × $3,000 = $9,000 — correct.",k:true},
- {t:"$3,000",e:"That is only one point.",k:false},
- {t:"$900",e:"A point is 1% ($3,000), not 0.1%.",k:false},
- {t:"$30,000",e:"That is 10 points.",k:false}]},
-
-{d:"Mortgage Types & Financing",q:"On an adjustable-rate mortgage, the 'margin' is:",ch:[
- {t:"The lender's constant add-on to the index",e:"Margin is the fixed amount added to the index to set the rate — correct.",k:true},
- {t:"The changing economic index itself",e:"The index moves; the margin is the constant add-on.",k:false},
- {t:"The maximum the rate can ever reach",e:"That is the rate cap, not the margin.",k:false},
- {t:"The introductory teaser rate",e:"The teaser is a temporary starting rate, not the margin.",k:false}]},
-
-{d:"Mortgage Types & Financing",q:"A savings bank that makes a home loan directly to a buyer is operating in the:",ch:[
- {t:"Primary mortgage market",e:"Loans originated directly to borrowers are the primary market — correct.",k:true},
- {t:"Secondary mortgage market",e:"That is where existing loans are bought and sold.",k:false},
- {t:"Intangible market",e:"No such financing market exists.",k:false},
- {t:"Escrow market",e:"Escrow is a closing function, not a lending market.",k:false}]},
+{d:"Computations & Closing",q:"A parcel of land contains 174,240 square feet. How many acres is that? (1 acre = 43,560 sq ft)",
+ work:["Acres = total sq ft ÷ 43,560","174,240 ÷ 43,560 = <b>4 acres</b>"],ch:[
+ {t:"4 acres",e:"174,240 ÷ 43,560 = 4 acres — correct.",k:true},
+ {t:"2 acres",e:"That would be only 87,120 sq ft.",k:false},
+ {t:"8 acres",e:"That doubles the correct acreage.",k:false},
+ {t:"40 acres",e:"Off by a factor of 10.",k:false}]},
 
 /* ===== REAL ESTATE CONTRACTS (9) ===== */
-{d:"Real Estate Contracts",q:"A contract signed by a 17-year-old minor is:",ch:[
- {t:"Voidable by the minor",e:"A minor lacks capacity, so the contract is voidable at the minor's option — correct.",k:true},
- {t:"Void from the start",e:"It can stand if the minor chooses; it is voidable, not void.",k:false},
- {t:"Fully binding on the minor",e:"The minor may disaffirm it.",k:false},
- {t:"A felony",e:"Signing a contract as a minor is not a crime.",k:false}]},
+{d:"Real Estate Contracts",q:"A valid written contract that can no longer be enforced because the statute of limitations has expired is:",ch:[
+ {t:"Unenforceable",e:"It is valid in form but barred from enforcement — unenforceable, correct.",k:true},
+ {t:"Void",e:"It was a real contract, not void from the start.",k:false},
+ {t:"Voidable",e:"Voidable means a party may cancel; here time simply ran out.",k:false},
+ {t:"Executed",e:"Executed means fully performed, which it was not.",k:false}]},
 
-{d:"Real Estate Contracts",q:"Replacing an original contract (or party) with a brand-new one, releasing the original, is:",ch:[
- {t:"Novation",e:"Novation substitutes a new contract/party with everyone's consent, releasing the old — correct.",k:true},
- {t:"Assignment",e:"Assignment transfers rights but may leave the original party liable.",k:false},
- {t:"Rescission",e:"Rescission cancels the contract without a replacement.",k:false},
- {t:"Acceleration",e:"Acceleration is a mortgage term.",k:false}]},
+{d:"Real Estate Contracts",q:"The parol evidence rule generally prevents prior oral statements from:",ch:[
+ {t:"Changing the terms of a complete written contract",e:"A full written contract controls over earlier oral talks — correct.",k:true},
+ {t:"Being spoken at all",e:"It limits their legal effect, not whether they were said.",k:false},
+ {t:"Replacing one of the buyers",e:"That is assignment/novation, not the parol rule.",k:false},
+ {t:"Voiding the deed",e:"It concerns contract interpretation, not deeds.",k:false}]},
 
-{d:"Real Estate Contracts",q:"In an option contract, the optionor (seller) is:",ch:[
- {t:"Bound to hold the offer open, while the optionee is not obligated to buy",e:"Only the seller is bound, making the option unilateral — correct.",k:true},
- {t:"Free to sell to anyone at any time",e:"During the option the seller must hold it open.",k:false},
- {t:"Required to buy the property back",e:"No such obligation exists in an option.",k:false},
- {t:"The party who must purchase",e:"The optionee (buyer) holds the right to buy, not an obligation.",k:false}]},
+{d:"Real Estate Contracts",q:"An outstanding offer is terminated by:",ch:[
+ {t:"The death of the offeror before acceptance",e:"Death of a party before acceptance terminates the offer — correct.",k:true},
+ {t:"The agent taking a vacation",e:"That does not affect the offer.",k:false},
+ {t:"Recording the listing",e:"Recording does not terminate an offer.",k:false},
+ {t:"Holding an open house",e:"An open house has no effect on an existing offer.",k:false}]},
 
-{d:"Real Estate Contracts",q:"Under which listing does the broker earn a commission regardless of who sells the property — even the owner?",ch:[
- {t:"Exclusive right of sale",e:"It pays the listing broker no matter who procures the buyer — correct.",k:true},
- {t:"Exclusive agency",e:"There the owner may sell themselves with no commission.",k:false},
- {t:"Open listing",e:"That pays only the broker who actually finds the buyer.",k:false},
- {t:"Net listing",e:"That concerns how commission is figured, not who earns it.",k:false}]},
+{d:"Real Estate Contracts",q:"A contract created by the parties' conduct rather than their words is a(n):",ch:[
+ {t:"Implied contract",e:"An implied contract arises from actions/conduct — correct.",k:true},
+ {t:"Express contract",e:"An express contract states its terms in words.",k:false},
+ {t:"Void contract",e:"Conduct-based agreements are not automatically void.",k:false},
+ {t:"Unilateral contract",e:"That describes how many parties promise, not implied vs express.",k:false}]},
 
-{d:"Real Estate Contracts",q:"A buyer changes a term and sends the contract back to the seller. Under the mirror-image rule, this is a:",ch:[
- {t:"Counteroffer that rejects the original offer",e:"Any change makes it a counteroffer and rejects the original — correct.",k:true},
- {t:"Valid acceptance",e:"Acceptance must match the offer exactly; a change is not acceptance.",k:false},
- {t:"Binding contract immediately",e:"No contract forms until the counteroffer is accepted.",k:false},
- {t:"Assignment",e:"That transfers contract rights, unrelated to changing offer terms.",k:false}]},
+{d:"Real Estate Contracts",q:"An inspection contingency in a sales contract lets the buyer:",ch:[
+ {t:"Cancel (or renegotiate) if the inspection reveals problems",e:"It protects the buyer based on inspection results — correct.",k:true},
+ {t:"Force the seller to make every repair",e:"It allows cancellation/negotiation, not mandatory repairs.",k:false},
+ {t:"Waive the financing terms",e:"Inspection and financing are separate contingencies.",k:false},
+ {t:"Extend the loan automatically",e:"It does not change loan terms.",k:false}]},
 
-{d:"Real Estate Contracts",q:"A contract whose purpose is illegal (for example, to commit fraud) is:",ch:[
- {t:"Void — it lacks a lawful object",e:"A contract for an illegal purpose has no legal effect; it is void — correct.",k:true},
- {t:"Voidable by either party",e:"It is void from the start, not merely voidable.",k:false},
- {t:"Valid and enforceable",e:"A lawful object is required for validity.",k:false},
- {t:"Unenforceable but valid",e:"An illegal object makes it void, not just unenforceable.",k:false}]},
+{d:"Real Estate Contracts",q:"A contract signed under duress or undue influence is:",ch:[
+ {t:"Voidable by the victim",e:"Duress/undue influence lets the pressured party cancel — voidable, correct.",k:true},
+ {t:"Automatically valid",e:"Coercion undermines genuine assent.",k:false},
+ {t:"Void as illegal",e:"It is voidable, not void for illegality.",k:false},
+ {t:"Already executed",e:"Coercion concerns formation, not completion.",k:false}]},
 
-{d:"Real Estate Contracts",q:"At closing, when both buyer and seller have fully performed, the contract is:",ch:[
- {t:"Executed",e:"Executed means all obligations are complete — correct.",k:true},
- {t:"Executory",e:"That means something still remains to be performed.",k:false},
- {t:"Void",e:"A completed valid contract is not void.",k:false},
- {t:"Unilateral",e:"That describes a one-promise contract, not completion status.",k:false}]},
+{d:"Real Estate Contracts",q:"A listing in which the broker keeps any amount received above the seller's set net price is a:",ch:[
+ {t:"Net listing",e:"In a net listing the broker keeps the excess over the seller's net — correct.",k:true},
+ {t:"Open listing",e:"An open listing pays a set commission to the procuring broker.",k:false},
+ {t:"Exclusive agency",e:"That pays the broker unless the owner sells it.",k:false},
+ {t:"Option listing",e:"That is not a standard listing type.",k:false}]},
 
-{d:"Real Estate Contracts",q:"A clause giving a tenant the chance to match any offer before the owner sells the building is a:",ch:[
- {t:"Right of first refusal",e:"It lets the holder match a future offer before a sale to another — correct.",k:true},
- {t:"Option contract",e:"An option sets a price to buy; it does not match a third party's offer.",k:false},
- {t:"Counteroffer",e:"That is a response that changes terms.",k:false},
- {t:"Contingency",e:"A contingency is a condition to be met, not a matching right.",k:false}]},
+{d:"Real Estate Contracts",q:"An option contract is ____ while a typical sales contract is ____:",ch:[
+ {t:"unilateral; bilateral",e:"Only the optionor is bound (unilateral); a sales contract has promises on both sides (bilateral) — correct.",k:true},
+ {t:"bilateral; unilateral",e:"Reversed — the option is the unilateral one.",k:false},
+ {t:"void; valid",e:"Both can be valid; this isn't about validity.",k:false},
+ {t:"implied; express",e:"Both are typically express, written agreements.",k:false}]},
 
-{d:"Real Estate Contracts",q:"A contract states that 'time is of the essence.' This means:",ch:[
- {t:"All stated deadlines must be met exactly",e:"The clause makes dates strict; missing one is a breach — correct.",k:true},
- {t:"There are no firm deadlines",e:"It does the opposite — it enforces deadlines.",k:false},
- {t:"Closing can occur whenever convenient",e:"It requires timely performance.",k:false},
- {t:"The contract is an option",e:"It has nothing to do with options.",k:false}]},
+{d:"Real Estate Contracts",q:"An assignment of a contract transfers:",ch:[
+ {t:"The contract rights to a third party (assignee)",e:"Assignment passes the rights to another party — correct.",k:true},
+ {t:"Full liability while releasing everyone",e:"That fuller release describes novation, not assignment.",k:false},
+ {t:"Ownership of the brokerage",e:"It has nothing to do with brokerage ownership.",k:false},
+ {t:"The property's zoning",e:"Zoning is unrelated to assignment.",k:false}]},
+
+/* ===== TAXES AFFECTING REAL ESTATE (6) ===== */
+{d:"Taxes Affecting Real Estate",q:"A home is assessed at $355,000 with a $50,000 homestead exemption, taxed at 21 mills. The annual tax is:",
+ work:["Taxable value = $355,000 − $50,000 = <b>$305,000</b>","21 mills = <b>$0.021</b> per $1","$305,000 × 0.021 = <b>$6,405</b>"],ch:[
+ {t:"$6,405",e:"$305,000 taxable × 0.021 = $6,405 — correct.",k:true},
+ {t:"$7,455",e:"That forgets to subtract the $50,000 exemption.",k:false},
+ {t:"$640.50",e:"That uses 2.1 mills instead of 21.",k:false},
+ {t:"$305.00",e:"That is just the taxable value in thousands, not the tax.",k:false}]},
+
+{d:"Taxes Affecting Real Estate",q:"A special assessment for a neighborhood improvement is classified as a:",ch:[
+ {t:"Non-ad-valorem charge",e:"Special assessments are non-ad-valorem (not based on value) — correct.",k:true},
+ {t:"Ad valorem tax",e:"Ad valorem taxes fund general government based on value.",k:false},
+ {t:"Federal income tax",e:"It is a local property charge, not income tax.",k:false},
+ {t:"Documentary stamp tax",e:"Doc stamps are transfer taxes at closing.",k:false}]},
+
+{d:"Taxes Affecting Real Estate",q:"For a church or charity to be exempt from property taxes, it must:",ch:[
+ {t:"Apply for the exemption",e:"Charitable/religious exemptions require an application — correct.",k:true},
+ {t:"Do nothing — it is automatic",e:"Unlike government 'immune' property, these must apply.",k:false},
+ {t:"Pay first, then get a refund",e:"That is not how the exemption works.",k:false},
+ {t:"Register with FREC",e:"FREC has no role in tax exemptions.",k:false}]},
+
+{d:"Taxes Affecting Real Estate",q:"In Florida, the official who COLLECTS property taxes is the:",ch:[
+ {t:"Tax collector",e:"The tax collector bills and collects the taxes — correct.",k:true},
+ {t:"Property appraiser",e:"The appraiser sets the assessed value, not collection.",k:false},
+ {t:"County commission alone",e:"Commissioners set millage; the tax collector collects.",k:false},
+ {t:"Clerk of court",e:"The clerk does not collect property taxes.",k:false}]},
+
+{d:"Taxes Affecting Real Estate",q:"A property assessed at $250,000 (no exemptions) has a $5,000 tax bill. The millage rate is:",
+ work:["Rate = tax ÷ value = $5,000 ÷ $250,000 = <b>0.020</b>","0.020 = <b>20 mills</b> ($0.020 per $1)"],ch:[
+ {t:"20 mills",e:"$5,000 ÷ $250,000 = 0.020 = 20 mills — correct.",k:true},
+ {t:"2 mills",e:"Off by a factor of 10.",k:false},
+ {t:"200 mills",e:"Far too high — recheck the decimal.",k:false},
+ {t:"0.2 mills",e:"Far too low — recheck the decimal.",k:false}]},
+
+{d:"Taxes Affecting Real Estate",q:"Florida's 'portability' provision lets a homestead owner:",ch:[
+ {t:"Transfer their accumulated Save Our Homes benefit to a new homestead",e:"Portability moves the SOH assessment savings to a new home — correct.",k:true},
+ {t:"Avoid all property taxes forever",e:"It transfers a benefit; it does not eliminate taxes.",k:false},
+ {t:"Skip applying for any exemption",e:"Exemptions must still be applied for.",k:false},
+ {t:"Automatically double the exemption",e:"It does not double exemptions.",k:false}]},
+
+/* ===== TYPES OF MORTGAGES & SOURCES OF FINANCING (6) ===== */
+{d:"Mortgage Types & Financing",q:"A buyer earns $9,000 gross per month. Using a 28% housing (front-end) ratio, the maximum monthly PITI payment is:",
+ work:["Front-end ratio = <b>28%</b> of gross monthly income","$9,000 × 0.28 = <b>$2,520</b>"],ch:[
+ {t:"$2,520",e:"$9,000 × 0.28 = $2,520 — correct.",k:true},
+ {t:"$3,240",e:"That is the 36% total-debt ratio, not the housing ratio.",k:false},
+ {t:"$900",e:"That is only 10% of income.",k:false},
+ {t:"$1,800",e:"That uses 20%, not 28%.",k:false}]},
+
+{d:"Mortgage Types & Financing",q:"USDA (Rural Development) loans are intended for:",ch:[
+ {t:"Eligible buyers in rural/suburban areas, often with no down payment",e:"USDA loans serve qualifying rural-area buyers with 100% financing — correct.",k:true},
+ {t:"Veterans only",e:"That describes VA loans.",k:false},
+ {t:"Investors only",e:"USDA loans are for owner-occupants, not investors.",k:false},
+ {t:"Commercial buildings only",e:"They are for residential purchases.",k:false}]},
+
+{d:"Mortgage Types & Financing",q:"A package mortgage is one that:",ch:[
+ {t:"Includes personal property (such as appliances) along with the real estate",e:"A package mortgage finances realty plus included personal property — correct.",k:true},
+ {t:"Covers several different parcels",e:"That is a blanket mortgage.",k:false},
+ {t:"Is always interest-only",e:"Package loans are not defined by interest-only terms.",k:false},
+ {t:"Is a reverse mortgage",e:"A reverse mortgage is unrelated.",k:false}]},
+
+{d:"Mortgage Types & Financing",q:"In a construction loan, funds are typically:",ch:[
+ {t:"Released in stages (draws) as the work progresses",e:"Construction loans disburse in draws tied to completed phases — correct.",k:true},
+ {t:"Paid in one lump sum at the end",e:"Money is advanced during construction, not only at the end.",k:false},
+ {t:"Interest-free",e:"Interest accrues on amounts drawn.",k:false},
+ {t:"Always government-insured",e:"Construction loans are not automatically government-insured.",k:false}]},
+
+{d:"Mortgage Types & Financing",q:"A mortgage broker (as opposed to a mortgage banker):",ch:[
+ {t:"Arranges loans between borrowers and lenders but does not fund them",e:"A broker matches borrowers with lenders without lending its own money — correct.",k:true},
+ {t:"Always lends its own funds",e:"That describes a mortgage banker/direct lender.",k:false},
+ {t:"Insures the loan",e:"Brokers do not insure loans.",k:false},
+ {t:"Appraises the property",e:"Appraisal is a separate function.",k:false}]},
+
+{d:"Mortgage Types & Financing",q:"Paying discount points at closing:",ch:[
+ {t:"Lowers the interest rate (raising the lender's yield)",e:"Points buy down the rate and increase lender yield — correct.",k:true},
+ {t:"Raises the borrower's interest rate",e:"Points reduce, not raise, the rate.",k:false},
+ {t:"Is the same as the down payment",e:"Points are a separate charge from the down payment.",k:false},
+ {t:"Eliminates property taxes",e:"Points have no effect on taxes.",k:false}]},
 
 /* ===== REAL ESTATE BROKERAGE ACTIVITIES & PROCEDURES (6) ===== */
-{d:"Brokerage Activities",q:"A broker may keep up to how much of their OWN funds in a PROPERTY MANAGEMENT escrow account?",ch:[
- {t:"$5,000",e:"Up to $5,000 of broker funds may be kept in a property management escrow account — correct.",k:true},
- {t:"$1,000",e:"$1,000 is the limit for a SALES escrow account.",k:false},
- {t:"$0",e:"A cushion is permitted.",k:false},
- {t:"$10,000",e:"Exceeds the allowed limit.",k:false}]},
+{d:"Brokerage Activities",q:"An undisclosed referral fee (kickback) paid to a licensee is:",ch:[
+ {t:"Prohibited unless properly disclosed",e:"Undisclosed kickbacks violate RESPA and license law — correct.",k:true},
+ {t:"Always allowed",e:"Undisclosed referral fees are not allowed.",k:false},
+ {t:"Required on every deal",e:"They are not required and are often illegal.",k:false},
+ {t:"Only an appraiser's concern",e:"It applies to licensees generally.",k:false}]},
 
-{d:"Brokerage Activities",q:"Brokerage transaction records must generally be retained for at least:",ch:[
- {t:"5 years",e:"Brokers must keep transaction records for at least 5 years — correct.",k:true},
- {t:"6 months",e:"Far too short.",k:false},
- {t:"1 year",e:"Too short — the requirement is 5 years.",k:false},
- {t:"20 years",e:"Longer than required.",k:false}]},
+{d:"Brokerage Activities",q:"A brokerage's branch office must be:",ch:[
+ {t:"Registered with the DBPR",e:"Each branch office must be registered with the DBPR — correct.",k:true},
+ {t:"Operated by a sales associate as the broker",e:"Only a broker may be in charge; an associate cannot act as broker.",k:false},
+ {t:"Unmarked with no signage",e:"Proper signage is still required.",k:false},
+ {t:"Exempt from all rules",e:"Branch offices follow brokerage rules.",k:false}]},
 
-{d:"Brokerage Activities",q:"When a broker cannot resolve conflicting escrow demands, the broker may request an escrow disbursement order (EDO) from:",ch:[
- {t:"FREC",e:"FREC issues an EDO directing how to disburse disputed funds — correct.",k:true},
- {t:"The buyer's lender",e:"Lenders do not issue EDOs.",k:false},
- {t:"The county clerk",e:"The clerk does not issue EDOs.",k:false},
- {t:"The title company",e:"The EDO comes from FREC, not the title company.",k:false}]},
+{d:"Brokerage Activities",q:"Earnest money in a Florida transaction may be held by:",ch:[
+ {t:"A broker, a title company, or an attorney",e:"Any of these authorized parties may hold the escrowed deposit — correct.",k:true},
+ {t:"Only the broker, ever",e:"A title company or attorney may also hold it.",k:false},
+ {t:"Only the buyer",e:"The deposit is held by a neutral escrow holder.",k:false},
+ {t:"Only FREC",e:"FREC does not hold transaction deposits.",k:false}]},
 
-{d:"Brokerage Activities",q:"An advertisement that fails to include the brokerage's name is a:",ch:[
- {t:"Prohibited 'blind' advertisement",e:"All ads must include the brokerage name; omitting it is an illegal blind ad — correct.",k:true},
- {t:"Required disclosure",e:"It is prohibited, not required.",k:false},
- {t:"Standard practice",e:"It violates advertising rules.",k:false},
- {t:"Permitted if the price is shown",e:"The brokerage name is required regardless of the price.",k:false}]},
+{d:"Brokerage Activities",q:"At closing, a grateful seller tries to hand the sales associate a $500 cash bonus. The associate should:",ch:[
+ {t:"Decline it directly — any compensation must come through the employing broker",e:"Associates may be paid only by their broker — correct.",k:true},
+ {t:"Accept it as a personal gift",e:"Accepting pay directly from a principal is a violation.",k:false},
+ {t:"Split it with the buyer",e:"That does not cure the violation.",k:false},
+ {t:"Keep it without telling the broker",e:"Compensation must flow through the broker.",k:false}]},
 
-{d:"Brokerage Activities",q:"Two competing brokerages agree to charge the same commission rate. This is:",ch:[
- {t:"Illegal price-fixing under antitrust law",e:"Agreeing with competitors to set prices is illegal price-fixing — correct.",k:true},
- {t:"Allowed if both agree",e:"Mutual agreement is exactly what makes it illegal.",k:false},
- {t:"Required by FREC",e:"FREC does not set commission rates.",k:false},
- {t:"A normal industry standard",e:"Commissions are always negotiable; fixing them is illegal.",k:false}]},
+{d:"Brokerage Activities",q:"Each active broker must maintain at least:",ch:[
+ {t:"One registered principal office with an enclosed room and proper sign",e:"A broker must have a registered principal office meeting these requirements — correct.",k:true},
+ {t:"Only a mailing address (P.O. box)",e:"A P.O. box is not a registered office.",k:false},
+ {t:"Only a website",e:"A physical registered office is required.",k:false},
+ {t:"No fixed location at all",e:"A registered office is mandatory.",k:false}]},
 
-{d:"Brokerage Activities",q:"A broker is generally considered to have EARNED the commission when the broker:",ch:[
- {t:"Produces a ready, willing, and able buyer on the seller's terms",e:"The commission is earned when such a buyer is produced — correct.",k:true},
- {t:"Places a sign in the yard",e:"Marketing steps alone do not earn the commission.",k:false},
- {t:"Lists the property",e:"Merely listing does not earn the commission.",k:false},
- {t:"Holds one open house",e:"An open house alone does not earn the commission.",k:false}]},
+{d:"Brokerage Activities",q:"Two brokerages agree to refuse to cooperate with a new discount broker in town. This is:",ch:[
+ {t:"An illegal group boycott under antitrust law",e:"Agreeing with a competitor to boycott another is an antitrust violation — correct.",k:true},
+ {t:"Legal competition",e:"Coordinated refusal to deal is not lawful competition.",k:false},
+ {t:"Required by FREC",e:"FREC does not require boycotts.",k:false},
+ {t:"A normal industry practice",e:"Group boycotts are illegal, not normal practice.",k:false}]},
 
 /* ===== RESIDENTIAL MORTGAGES (6) ===== */
-{d:"Residential Mortgages",q:"The mortgage clause requiring the lender to release the lien once the loan is fully paid is the:",ch:[
- {t:"Defeasance clause",e:"Defeasance requires the lender to release the mortgage upon full payment — correct.",k:true},
- {t:"Acceleration clause",e:"That makes the balance due upon default.",k:false},
- {t:"Due-on-sale clause",e:"That triggers payoff upon transfer.",k:false},
- {t:"Escalation clause",e:"That raises a rate or rent.",k:false}]},
+{d:"Residential Mortgages",q:"Negative amortization occurs when:",ch:[
+ {t:"The payment is less than the interest due, so the balance grows",e:"Unpaid interest is added to principal, increasing the balance — correct.",k:true},
+ {t:"The balance shrinks faster than scheduled",e:"That is accelerated payoff, the opposite.",k:false},
+ {t:"Interest is forgiven each month",e:"Interest is not forgiven; it is added on.",k:false},
+ {t:"The loan is interest-free",e:"Negative amortization involves unpaid interest, not zero interest.",k:false}]},
 
-{d:"Residential Mortgages",q:"A clause that lets the lender demand the full balance if the property is sold is the:",ch:[
- {t:"Due-on-sale (alienation) clause",e:"It lets the lender call the loan due upon transfer — correct.",k:true},
- {t:"Defeasance clause",e:"That releases the lien when the loan is paid.",k:false},
- {t:"Subordination clause",e:"That changes lien priority.",k:false},
- {t:"Prepayment clause",e:"That addresses paying early, not a sale.",k:false}]},
+{d:"Residential Mortgages",q:"A partial release clause is typically found in a blanket mortgage and lets the borrower:",ch:[
+ {t:"Release individual parcels from the lien as they are paid down",e:"It frees specific parcels as portions of the debt are paid — correct.",k:true},
+ {t:"Accelerate the entire loan",e:"That is the acceleration clause.",k:false},
+ {t:"Raise the interest rate",e:"It addresses releasing parcels, not the rate.",k:false},
+ {t:"Transfer title to the lender",e:"It releases liens, not transfers ownership.",k:false}]},
 
-{d:"Residential Mortgages",q:"On a conventional loan, private mortgage insurance (PMI) is generally required when the down payment is less than:",ch:[
- {t:"20%",e:"PMI is typically required below 20% down — correct.",k:true},
- {t:"3.5%",e:"3.5% is the FHA minimum (with MIP, not PMI).",k:false},
- {t:"50%",e:"Not the standard PMI threshold.",k:false},
- {t:"10%",e:"PMI tracks the 20% equity line, not 10%.",k:false}]},
+{d:"Residential Mortgages",q:"The promissory note is a:",ch:[
+ {t:"Negotiable instrument the lender may sell or transfer",e:"The note is a negotiable instrument that can be sold on the secondary market — correct.",k:true},
+ {t:"Deed conveying ownership",e:"A deed conveys title; the note is the debt promise.",k:false},
+ {t:"Lease agreement",e:"It is not a lease.",k:false},
+ {t:"Lien release",e:"That is a satisfaction, not the note.",k:false}]},
 
-{d:"Residential Mortgages",q:"When a buyer ASSUMES the seller's loan WITH novation, the:",ch:[
- {t:"Original borrower is released from liability",e:"Novation substitutes the buyer and releases the original borrower — correct.",k:true},
- {t:"Original borrower remains fully liable",e:"That is taking title 'subject to,' not assumption with novation.",k:false},
- {t:"Lender must forgive the loan",e:"The debt continues; only the obligor changes.",k:false},
- {t:"Interest rate drops to zero",e:"Loan terms do not become interest-free.",k:false}]},
+{d:"Residential Mortgages",q:"The party who LENDS the money and holds the mortgage is the:",ch:[
+ {t:"Mortgagee (the lender)",e:"The lender is the mortgagee who holds the security instrument — correct.",k:true},
+ {t:"Mortgagor (the borrower)",e:"The borrower is the mortgagor.",k:false},
+ {t:"Grantor",e:"That is a deed term for the one conveying title.",k:false},
+ {t:"Lessee",e:"That is a leasing term for a tenant.",k:false}]},
 
-{d:"Residential Mortgages",q:"When a mortgage loan is paid in full, the document recorded to clear the lien is the:",ch:[
- {t:"Satisfaction of mortgage",e:"A satisfaction (release) is recorded when the debt is fully paid — correct.",k:true},
- {t:"Promissory note",e:"The note is the promise to pay, not the release.",k:false},
- {t:"Estoppel letter",e:"That states the balance owed, not a release.",k:false},
- {t:"Acceleration notice",e:"That demands payment on default.",k:false}]},
+{d:"Residential Mortgages",q:"After a foreclosure sale pays the debt and costs, any leftover money (surplus) goes to:",ch:[
+ {t:"Junior lienholders, then the former owner",e:"Surplus pays junior liens in order, with any remainder to the former owner — correct.",k:true},
+ {t:"The foreclosing lender to keep",e:"The lender keeps only what it is owed.",k:false},
+ {t:"The state automatically",e:"It does not simply go to the state.",k:false},
+ {t:"The auction buyer",e:"The buyer paid for the property; surplus is not theirs.",k:false}]},
 
-{d:"Residential Mortgages",q:"Pledging property as security for a loan while keeping possession of it is called:",ch:[
- {t:"Hypothecation",e:"Hypothecation pledges property as collateral without giving up possession — correct.",k:true},
- {t:"Subordination",e:"Subordination changes a lien's priority.",k:false},
- {t:"Novation",e:"Novation substitutes a party or contract.",k:false},
- {t:"Alienation",e:"Alienation is the transfer of title.",k:false}]},
+{d:"Residential Mortgages",q:"A home is worth $600,000 and the owner owes $410,000 total. The owner's equity is:",
+ work:["Equity = value − amount owed","$600,000 − $410,000 = <b>$190,000</b>"],ch:[
+ {t:"$190,000",e:"$600,000 − $410,000 = $190,000 equity — correct.",k:true},
+ {t:"$410,000",e:"That is the debt owed, not the equity.",k:false},
+ {t:"$1,010,000",e:"That adds value and debt instead of subtracting.",k:false},
+ {t:"$290,000",e:"Not a valid result; subtract the debt from the value.",k:false}]},
 
 /* ===== TITLES, DEEDS & OWNERSHIP RESTRICTIONS (3) ===== */
-{d:"Titles & Deeds",q:"Recording a deed in the public records provides:",ch:[
- {t:"Constructive notice to the world of the ownership interest",e:"Recording gives legal (constructive) notice to everyone — correct.",k:true},
- {t:"A guarantee that the title is perfect",e:"Recording gives notice but does not guarantee title; that is title insurance.",k:false},
- {t:"Ownership even without a valid deed",e:"Recording an invalid deed does not create ownership.",k:false},
- {t:"No legal effect at all",e:"Recording has the important effect of constructive notice.",k:false}]},
+{d:"Titles & Deeds",q:"A 'cloud on title' is:",ch:[
+ {t:"A claim or defect that impairs the title, often cleared by a suit to quiet title",e:"A cloud is a defect on title that a quiet-title action can remove — correct.",k:true},
+ {t:"A guarantee that title is perfect",e:"A cloud is a problem, not a guarantee.",k:false},
+ {t:"The deed document itself",e:"The deed is not a defect.",k:false},
+ {t:"A surveyor's boundary marker",e:"A marker is a survey feature, not a title defect.",k:false}]},
 
-{d:"Titles & Deeds",q:"Acquiring title by openly, continuously, and without permission using another's land for the statutory period is:",ch:[
- {t:"Adverse possession",e:"Open, notorious, continuous, hostile use for the statutory period can transfer title — correct.",k:true},
- {t:"An easement by necessity",e:"That grants use (such as access), not ownership.",k:false},
- {t:"Escheat",e:"Escheat passes property to the state when there are no heirs.",k:false},
- {t:"A quitclaim",e:"A quitclaim is a voluntary conveyance document.",k:false}]},
+{d:"Titles & Deeds",q:"A deed must be acknowledged (notarized) in order to be:",ch:[
+ {t:"Recorded in the public records",e:"Notarized acknowledgment is needed to record the deed — correct.",k:true},
+ {t:"Valid between the parties",e:"A deed can be valid between the parties without recording.",k:false},
+ {t:"Signed by the grantee",e:"The grantee never signs the deed.",k:false},
+ {t:"Delivered to the buyer",e:"Delivery is separate from the notarization-for-recording requirement.",k:false}]},
 
-{d:"Titles & Deeds",q:"Which is NOT required for a valid deed?",ch:[
- {t:"The grantee's signature",e:"The grantee need not sign; only the grantor must — correct answer.",k:true},
- {t:"The grantor's signature",e:"The grantor must sign the deed.",k:false},
- {t:"A legal description of the property",e:"A proper legal description is required.",k:false},
- {t:"Delivery and acceptance",e:"The deed must be delivered and accepted to convey title.",k:false}]},
+{d:"Titles & Deeds",q:"'Title' refers to:",ch:[
+ {t:"The ownership of, or right to, the property",e:"Title is the concept of ownership; a deed is the document that conveys it — correct.",k:true},
+ {t:"The paper document that conveys ownership",e:"That is the DEED, not title itself.",k:false},
+ {t:"A lien against the property",e:"A lien is a claim, not ownership.",k:false},
+ {t:"An easement",e:"An easement is a use right, not ownership/title.",k:false}]},
 
 /* ===== THE REAL ESTATE BUSINESS (1) ===== */
-{d:"The Real Estate Business",q:"Compared with assets like stocks, real estate is generally considered:",ch:[
- {t:"Relatively illiquid (slow to convert to cash)",e:"Real estate typically takes time to sell, making it illiquid — correct.",k:true},
- {t:"Highly liquid",e:"Real estate is the opposite of highly liquid.",k:false},
- {t:"Identical to stocks",e:"Real estate is unique and illiquid, unlike fungible stocks.",k:false},
- {t:"Completely risk-free",e:"No investment, including real estate, is risk-free.",k:false}]},
+{d:"The Real Estate Business",q:"The economic characteristics of land include scarcity, permanence of investment, area preference, and:",ch:[
+ {t:"Improvements",e:"Improvements (man-made changes affecting value) is the fourth economic characteristic — correct.",k:true},
+ {t:"Immobility",e:"Immobility is a PHYSICAL characteristic.",k:false},
+ {t:"Indestructibility",e:"Indestructibility is a PHYSICAL characteristic.",k:false},
+ {t:"Uniqueness",e:"Uniqueness is a PHYSICAL characteristic.",k:false}]},
 
 /* ===== PLANNING & ZONING (1) ===== */
-{d:"Planning & Zoning",q:"A local government's authority to enact zoning to protect public health, safety, and welfare comes from its:",ch:[
- {t:"Police power",e:"Zoning is an exercise of police power, requiring no compensation — correct.",k:true},
- {t:"Power of eminent domain",e:"Eminent domain TAKES property with compensation; zoning only regulates use.",k:false},
- {t:"Power of escheat",e:"Escheat returns property to the state when there are no heirs.",k:false},
- {t:"Taxing power",e:"Taxation funds government; it does not authorize zoning.",k:false}]}
+{d:"Planning & Zoning",q:"Before a newly constructed building may be legally occupied, the local government issues a:",ch:[
+ {t:"Certificate of occupancy",e:"A certificate of occupancy confirms the building meets code and may be occupied — correct.",k:true},
+ {t:"Variance",e:"A variance grants relief from a zoning rule.",k:false},
+ {t:"Quitclaim deed",e:"That is a title document, not an occupancy approval.",k:false},
+ {t:"Estoppel certificate",e:"That verifies amounts owed, not occupancy.",k:false}]}
 
 ];
+
 
 /* ===================== QUIZ ENGINE ===================== */
 const LETTERS=["A","B","C","D"];
